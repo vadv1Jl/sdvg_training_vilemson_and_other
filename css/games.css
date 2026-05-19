@@ -1,123 +1,55 @@
 <style>
-#g1-instruction{font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;text-align:center;color:var(--color-text-muted)}
-#g1-target{
-  font-size:2rem;font-weight:900;padding:0.5rem 1.5rem;
-  border-radius:var(--radius-lg);margin-bottom:1.75rem;
-  border:2.5px solid currentColor;
-}
-#g1-options{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:1rem}
-.g1-btn{
-  width:80px;height:80px;border-radius:50%;border:3px solid transparent;
-  cursor:pointer;transition:all var(--transition);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.5rem;box-shadow:var(--shadow-sm);
-}
+/* ─── TIMER ─── */
+#timer-bar-wrap{width:100%;height:7px;background:var(--color-border);border-radius:var(--radius-xl);overflow:hidden;margin-bottom:1.25rem}
+#timer-bar{height:100%;background:var(--color-primary);border-radius:var(--radius-xl);transition:background 0.3s}
+
+/* ─── GAME 1 ─── */
+#g1-target{font-size:1.9rem;font-weight:900;padding:0.45rem 1.4rem;border-radius:var(--radius-lg);margin-bottom:1.5rem;border:2.5px solid currentColor}
+#g1-options{display:flex;flex-wrap:wrap;gap:0.9rem;justify-content:center;margin-bottom:0.75rem}
+.g1-btn{width:74px;height:74px;border-radius:50%;border:3px solid transparent;cursor:pointer;transition:all var(--transition);box-shadow:var(--shadow-sm)}
 .g1-btn:hover{transform:scale(1.12);box-shadow:var(--shadow-md)}
-.g1-btn.correct{border-color:#22c55e;box-shadow:0 0 20px rgba(34,197,94,0.5)!important}
-.g1-btn.wrong{border-color:#ef4444;box-shadow:0 0 20px rgba(239,68,68,0.4)!important}
-#g1-feedback{font-size:1.3rem;font-weight:800;height:2rem;text-align:center}
+.g1-btn.correct{border-color:#22c55e!important;box-shadow:0 0 20px rgba(34,197,94,0.5)!important}
+.g1-btn.wrong{border-color:#ef4444!important;box-shadow:0 0 16px rgba(239,68,68,0.4)!important}
+#g1-feedback{font-size:1.2rem;font-weight:800;height:2rem;text-align:center}
 
-/* ============================================================
-   GAME 2: «Найди лишнее»
-   ============================================================ */
-#g2-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:0.75rem;margin-bottom:1.25rem;max-width:440px;
-}
-.g2-cell{
-  aspect-ratio:1;border-radius:var(--radius-lg);border:2.5px solid var(--color-border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:2.2rem;cursor:pointer;transition:all var(--transition);
-  background:var(--color-surface-2);
-}
-.g2-cell:hover{transform:scale(1.1);border-color:var(--color-primary);background:color-mix(in oklch,var(--color-primary) 10%,var(--color-surface))}
+/* ─── GAME 2 ─── */
+#g2-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.65rem;margin-bottom:1.1rem;max-width:420px}
+.g2-cell{aspect-ratio:1;border-radius:var(--radius-lg);border:2.5px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;transition:all var(--transition);background:var(--color-surface-2)}
+.g2-cell:hover{transform:scale(1.08);border-color:var(--color-primary)}
 .g2-cell.correct{border-color:var(--color-success)!important;background:color-mix(in oklch,var(--color-success) 15%,var(--color-surface))!important;animation:pop 0.4s ease}
-.g2-cell.wrong{border-color:var(--color-error)!important;background:color-mix(in oklch,var(--color-error) 15%,var(--color-surface))!important;animation:shake 0.4s ease}
-@keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-#g2-instruction{font-size:1rem;color:var(--color-text-muted);margin-bottom:1rem;text-align:center}
-#g2-feedback{font-size:1.2rem;font-weight:800;text-align:center;min-height:2rem}
+.g2-cell.wrong{border-color:var(--color-error)!important;animation:shake 0.4s ease}
+.round-indicator{display:flex;gap:0.35rem;justify-content:center;margin-bottom:0.9rem}
+.round-dot{width:9px;height:9px;border-radius:50%;background:var(--color-border);transition:background 0.3s}
+.round-dot.done{background:var(--color-primary)}
+.round-dot.current{background:var(--color-accent)}
+#g2-feedback{font-size:1.1rem;font-weight:800;text-align:center;min-height:1.8rem}
 
-/* ============================================================
-   GAME 3: «Пауза» (дыхание)
-   ============================================================ */
-#g3-circle{
-  width:160px;height:160px;border-radius:50%;
-  background:var(--color-primary);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1rem;font-weight:800;color:#fff;text-align:center;
-  box-shadow:0 0 0 0 rgba(79,110,247,0.4);
-  transition:transform 4s ease,box-shadow 4s ease;
-  margin:1.5rem auto;
-}
-#g3-circle.inhale{transform:scale(1.5);box-shadow:0 0 0 40px rgba(79,110,247,0.0)}
-#g3-circle.exhale{transform:scale(1);box-shadow:0 0 0 0 rgba(79,110,247,0.4)}
-#g3-phase{font-size:1.5rem;font-weight:900;text-align:center;margin-top:0.5rem}
-#g3-counter{font-size:1.1rem;color:var(--color-text-muted);text-align:center;margin-top:0.5rem}
-#g3-desc{font-size:0.95rem;color:var(--color-text-muted);text-align:center;max-width:38ch;margin:0 auto 1.5rem}
+/* ─── GAME 3 ─── */
+#g3-circle{width:150px;height:150px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;font-size:0.95rem;font-weight:800;color:#fff;text-align:center;transition:transform 4s ease,box-shadow 4s ease;margin:1.25rem auto}
+#g3-circle.inhale{transform:scale(1.5);box-shadow:0 0 0 40px rgba(79,110,247,0)}
+#g3-circle.exhale{transform:scale(1)}
+#g3-phase{font-size:1.4rem;font-weight:900;text-align:center}
+#g3-counter{font-size:1rem;color:var(--color-text-muted);text-align:center;margin-top:0.25rem}
 
-/* ============================================================
-   GAME 4: «Шульте» (таблица)
-   ============================================================ */
-#g4-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:0.4rem;max-width:380px;margin:1rem auto;
-}
-.g4-cell{
-  aspect-ratio:1;border-radius:var(--radius-sm);border:2px solid var(--color-border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.3rem;font-weight:900;cursor:pointer;transition:all var(--transition);
-  background:var(--color-surface-2);
-}
+/* ─── GAME 4 ─── */
+#g4-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0.35rem;max-width:370px;margin:0.75rem auto}
+.g4-cell{aspect-ratio:1;border-radius:var(--radius-sm);border:2px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;cursor:pointer;transition:all var(--transition);background:var(--color-surface-2)}
 .g4-cell:hover{background:color-mix(in oklch,var(--color-primary) 12%,var(--color-surface));border-color:var(--color-primary)}
 .g4-cell.found{background:color-mix(in oklch,var(--color-success) 20%,var(--color-surface));border-color:var(--color-success);color:var(--color-success);animation:pop 0.3s ease}
 .g4-cell.error{animation:shake 0.4s ease;border-color:var(--color-error)}
-#g4-target{font-size:1.5rem;font-weight:900;text-align:center;margin-bottom:0.5rem}
-#g4-target span{color:var(--color-primary);font-size:2.2rem}
-#g4-feedback{text-align:center;font-size:1rem;color:var(--color-text-muted);margin-top:0.5rem}
 
-/* ============================================================
-   GAME 5: «Запомни» (память)
-   ============================================================ */
-#g5-seq{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;margin:1rem 0}
-.g5-indicator{
-  width:22px;height:22px;border-radius:50%;
-  background:var(--color-border);transition:all 0.3s ease;
-}
+/* ─── GAME 5 ─── */
+#g5-seq{display:flex;gap:0.65rem;justify-content:center;flex-wrap:wrap;margin:0.75rem 0}
+.g5-indicator{width:20px;height:20px;border-radius:50%;background:var(--color-border);transition:all 0.3s}
 .g5-indicator.active{background:var(--color-primary);box-shadow:0 0 10px rgba(79,110,247,0.5)}
 .g5-indicator.correct{background:var(--color-success)}
 .g5-indicator.wrong{background:var(--color-error)}
-#g5-cards{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin:1.25rem 0}
-.g5-card{
-  width:72px;height:72px;border-radius:var(--radius-lg);
-  display:flex;align-items:center;justify-content:center;
-  font-size:2rem;cursor:pointer;border:2.5px solid transparent;
-  transition:all var(--transition);background:var(--color-surface-2);
-}
+#g5-cards{display:flex;flex-wrap:wrap;gap:0.85rem;justify-content:center;margin:1rem 0}
+.g5-card{width:68px;height:68px;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:1.9rem;cursor:pointer;border:2.5px solid transparent;transition:all var(--transition);background:var(--color-surface-2)}
 .g5-card:hover:not(.disabled){transform:scale(1.1);border-color:var(--color-primary)}
 .g5-card.highlight{background:var(--color-primary);transform:scale(1.15);box-shadow:var(--shadow-md)}
 .g5-card.correct{border-color:var(--color-success)!important;animation:pop 0.3s ease}
 .g5-card.wrong{border-color:var(--color-error)!important;animation:shake 0.4s ease}
-.g5-card.disabled{cursor:not-allowed;opacity:0.7}
-#g5-instruction{text-align:center;font-size:1rem;font-weight:700;color:var(--color-text-muted);margin-bottom:0.5rem}
-#g5-level{text-align:center;font-size:0.9rem;color:var(--color-text-muted)}
+.g5-card.disabled{cursor:not-allowed;opacity:0.6}
 
-/* RESULTS */
-.result-box{text-align:center;padding:2rem 1rem}
-.result-emoji{font-size:4rem;margin-bottom:0.75rem;animation:pop 0.5s ease}
-.result-title{font-size:1.8rem;font-weight:900;margin-bottom:0.5rem}
-.result-score{font-size:1.1rem;color:var(--color-text-muted);margin-bottom:1.75rem}
-.result-btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-
-/* TIMER */
-#timer-bar-wrap{width:100%;height:8px;background:var(--color-border);border-radius:var(--radius-xl);overflow:hidden;margin-bottom:1.25rem}
-#timer-bar{height:100%;background:var(--color-primary);border-radius:var(--radius-xl);transition:width 0.1s linear}
-
-/* progress indicator */
-.round-indicator{display:flex;gap:0.4rem;justify-content:center;margin-bottom:1rem}
-.round-dot{width:10px;height:10px;border-radius:50%;background:var(--color-border);transition:background 0.3s}
-.round-dot.done{background:var(--color-primary)}
-.round-dot.current{background:var(--color-accent)}
 </style>
