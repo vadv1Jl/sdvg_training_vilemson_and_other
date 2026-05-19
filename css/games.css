@@ -1,9 +1,4 @@
-<style>
-/* ─── TIMER ─── */
-#timer-bar-wrap{width:100%;height:7px;background:var(--color-border);border-radius:var(--radius-xl);overflow:hidden;margin-bottom:1.25rem}
-#timer-bar{height:100%;background:var(--color-primary);border-radius:var(--radius-xl);transition:background 0.3s}
-
-/* ─── GAME 1 ─── */
+/* ─── GAME 1 — Поймай цвет ─── */
 #g1-target{font-size:1.9rem;font-weight:900;padding:0.45rem 1.4rem;border-radius:var(--radius-lg);margin-bottom:1.5rem;border:2.5px solid currentColor}
 #g1-options{display:flex;flex-wrap:wrap;gap:0.9rem;justify-content:center;margin-bottom:0.75rem}
 .g1-btn{width:74px;height:74px;border-radius:50%;border:3px solid transparent;cursor:pointer;transition:all var(--transition);box-shadow:var(--shadow-sm)}
@@ -12,7 +7,7 @@
 .g1-btn.wrong{border-color:#ef4444!important;box-shadow:0 0 16px rgba(239,68,68,0.4)!important}
 #g1-feedback{font-size:1.2rem;font-weight:800;height:2rem;text-align:center}
 
-/* ─── GAME 2 ─── */
+/* ─── GAME 2 — Найди лишнее ─── */
 #g2-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.65rem;margin-bottom:1.1rem;max-width:420px}
 .g2-cell{aspect-ratio:1;border-radius:var(--radius-lg);border:2.5px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;transition:all var(--transition);background:var(--color-surface-2)}
 .g2-cell:hover{transform:scale(1.08);border-color:var(--color-primary)}
@@ -24,21 +19,21 @@
 .round-dot.current{background:var(--color-accent)}
 #g2-feedback{font-size:1.1rem;font-weight:800;text-align:center;min-height:1.8rem}
 
-/* ─── GAME 3 ─── */
+/* ─── GAME 3 — Пауза ─── */
 #g3-circle{width:150px;height:150px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;font-size:0.95rem;font-weight:800;color:#fff;text-align:center;transition:transform 4s ease,box-shadow 4s ease;margin:1.25rem auto}
 #g3-circle.inhale{transform:scale(1.5);box-shadow:0 0 0 40px rgba(79,110,247,0)}
 #g3-circle.exhale{transform:scale(1)}
 #g3-phase{font-size:1.4rem;font-weight:900;text-align:center}
 #g3-counter{font-size:1rem;color:var(--color-text-muted);text-align:center;margin-top:0.25rem}
 
-/* ─── GAME 4 ─── */
+/* ─── GAME 4 — Шульте ─── */
 #g4-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0.35rem;max-width:370px;margin:0.75rem auto}
 .g4-cell{aspect-ratio:1;border-radius:var(--radius-sm);border:2px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;cursor:pointer;transition:all var(--transition);background:var(--color-surface-2)}
 .g4-cell:hover{background:color-mix(in oklch,var(--color-primary) 12%,var(--color-surface));border-color:var(--color-primary)}
 .g4-cell.found{background:color-mix(in oklch,var(--color-success) 20%,var(--color-surface));border-color:var(--color-success);color:var(--color-success);animation:pop 0.3s ease}
 .g4-cell.error{animation:shake 0.4s ease;border-color:var(--color-error)}
 
-/* ─── GAME 5 ─── */
+/* ─── GAME 5 — Запомни ряд ─── */
 #g5-seq{display:flex;gap:0.65rem;justify-content:center;flex-wrap:wrap;margin:0.75rem 0}
 .g5-indicator{width:20px;height:20px;border-radius:50%;background:var(--color-border);transition:all 0.3s}
 .g5-indicator.active{background:var(--color-primary);box-shadow:0 0 10px rgba(79,110,247,0.5)}
@@ -51,5 +46,3 @@
 .g5-card.correct{border-color:var(--color-success)!important;animation:pop 0.3s ease}
 .g5-card.wrong{border-color:var(--color-error)!important;animation:shake 0.4s ease}
 .g5-card.disabled{cursor:not-allowed;opacity:0.6}
-
-</style>
