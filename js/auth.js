@@ -10,7 +10,8 @@ let activeTab='games';
 function switchTab(tab){
   activeTab=tab;
   document.querySelectorAll('.tab-btn').forEach((b,i)=>{
-    b.classList.toggle('active',['games','profile','leaderboard'][i]===tab);
+    // ИЗМЕНИТЬ — теперь 4 вкладки:
+    b.classList.toggle('active',['games','profile','leaderboard','team'][i]===tab);
   });
   document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.add('active');
