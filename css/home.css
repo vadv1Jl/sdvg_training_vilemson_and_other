@@ -1,8 +1,9 @@
-<style>
-/* ─── HOME ─── */
+/* ─── HERO ─── */
 .hero{text-align:center;padding:0.5rem 0 1.75rem}
 .hero h1{font-size:clamp(1.7rem,5vw,2.7rem);font-weight:900;line-height:1.1;margin-bottom:0.65rem;background:linear-gradient(135deg,var(--color-primary),var(--color-accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero p{color:var(--color-text-muted);font-size:1.05rem;max-width:44ch;margin:0 auto}
+
+/* ─── КАРТОЧКИ ИГР ─── */
 .game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(255px,100%),1fr));gap:1.1rem;margin-top:1.5rem}
 .game-card{background:var(--color-surface);border:1.5px solid var(--color-border);border-radius:var(--radius-xl);padding:1.4rem;cursor:pointer;transition:all var(--transition);box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
 .game-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--card-color);border-radius:var(--radius-xl) var(--radius-xl) 0 0}
@@ -15,7 +16,7 @@
 .card-best{font-size:0.8rem;color:var(--color-text-muted);font-weight:600}
 .card-best b{color:var(--color-primary)}
 
-/* ─── PROFILE ─── */
+/* ─── ПРОФИЛЬ ─── */
 .profile-header{display:flex;align-items:center;gap:1.25rem;background:var(--color-surface);border:1.5px solid var(--color-border);border-radius:var(--radius-xl);padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)}
 .profile-avatar-big{width:60px;height:60px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;font-weight:900;flex-shrink:0}
 .profile-name{font-size:1.4rem;font-weight:900}
@@ -30,6 +31,8 @@
 .record-label{font-size:0.82rem;color:var(--color-text-muted);font-weight:600}
 .record-value{font-size:1rem;font-weight:900;color:var(--color-primary)}
 .record-empty{color:var(--color-text-muted);font-size:0.88rem;text-align:center;padding:0.5rem 0}
+
+/* ─── ТАБЛИЦА ЛИДЕРОВ ─── */
 .leaderboard{background:var(--color-surface);border:1.5px solid var(--color-border);border-radius:var(--radius-xl);padding:1.5rem;margin-top:1.5rem;box-shadow:var(--shadow-sm)}
 .lb-title{font-size:1.1rem;font-weight:900;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
 .lb-row{display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid var(--color-border)}
@@ -42,5 +45,3 @@
 .lb-name.me{color:var(--color-primary)}
 .lb-score{font-weight:900;color:var(--color-primary)}
 .lb-empty{text-align:center;color:var(--color-text-muted);padding:1rem 0;font-size:0.9rem}
-
-</style>
