@@ -8,18 +8,36 @@ const COLORS=[
   {name:'Зелёный',hex:'#22c55e'},{name:'Жёлтый',hex:'#facc15'},
   {name:'Фиолетовый',hex:'#a855f7'},{name:'Оранжевый',hex:'#f97316'},
 ];
-let g1={score:0,round:0,answered:false,raf:null};
+let g1={score:0,round:0,answered:false,raf:null,reactionStart:0,reactionRaf:null,times:[]};
 
-function initG1(){g1={score:0,round:0,answered:false,raf:null};document.getElementById('g1-score').textContent=0;g1Round();}
+function initG1(){
+  g1={score:0,round:0,answered:false,raf:null,reactionStart:0,reactionRaf:null,times:[]};
+  document.getElementById('g1-score').textContent=0;
+  document.getElementById('g1-reaction').textContent='';
+  g1Round();
+}
+
 function g1Round(){
-  if(g1.round>=10){showResult(g1.score>=8?'🏆':g1.score>=5?'😊':'💪',g1.score>=8?'Отлично!':g1.score>=5?'Хорошо!':'Тренируйся!',`Очки: ${g1.score} из 10`,1,g1.score);return;}
+  if(g1.round>=10){
+    const avg=g1.times.length?Math.round(g1.times.reduce((a,b)=>a+b,0)/g1.times.length):0;
+    showResult(
+      avg<600?'🏆':avg<1000?'😊':'💪',
+      avg<600?'Молниеносно!':avg<1000?'Хорошо!':'Тренируйся!',
+      `Очки: ${g1.score}/10 • Среднее время: ${avg} мс`,
+      1, avg
+    );
+    return;
+  }
   g1.round++;g1.answered=false;
   document.getElementById('g1-round').textContent=g1.round;
   document.getElementById('g1-feedback').textContent='';
+  document.getElementById('g1-reaction').textContent='⏱ 0 мс';
+
   const s=[...COLORS].sort(()=>Math.random()-0.5);
   const target=s[0],opts=s.slice(0,4).sort(()=>Math.random()-0.5);
   const t=document.getElementById('g1-target');
   t.textContent=target.name;t.style.color=target.hex;t.style.borderColor=target.hex;
+
   const op=document.getElementById('g1-options');op.innerHTML='';
   opts.forEach(c=>{
     const b=document.createElement('button');b.className='g1-btn';
@@ -27,7 +45,20 @@ function g1Round(){
     b.addEventListener('click',()=>g1Ans(b,c===target,target));
     op.appendChild(b);
   });
-  const bar=document.getElementById('timer-bar');bar.style.transition='none';bar.style.width='100%';
+
+  const bar=document.getElementById('timer-bar');
+  bar.style.transition='none';bar.style.width='100%';
+
+  // Таймер реакции
+  g1.reactionStart=Date.now();
+  const reactionEl=document.getElementById('g1-reaction');
+  const tickReaction=()=>{
+    if(g1.answered)return;
+    reactionEl.textContent=`⏱ ${Date.now()-g1.reactionStart} мс`;
+    g1.reactionRaf=requestAnimationFrame(tickReaction);
+  };
+  g1.reactionRaf=requestAnimationFrame(tickReaction);
+
   const t0=Date.now(),dur=5000;
   const tick=()=>{
     if(g1.answered)return;
@@ -39,11 +70,30 @@ function g1Round(){
   };
   g1.raf=requestAnimationFrame(tick);
 }
+
 function g1Ans(btn,ok,target,timeout=false){
-  if(g1.answered)return;g1.answered=true;if(g1.raf)cancelAnimationFrame(g1.raf);
+  if(g1.answered)return;
+  g1.answered=true;
+  if(g1.raf)cancelAnimationFrame(g1.raf);
+  if(g1.reactionRaf)cancelAnimationFrame(g1.reactionRaf);
+
+  const elapsed=Date.now()-g1.reactionStart;
   const fb=document.getElementById('g1-feedback');
-  if(ok){g1.score++;document.getElementById('g1-score').textContent=g1.score;btn.classList.add('correct');fb.textContent='✅ Правильно!';fb.style.color='var(--color-success)';}
-  else{if(btn)btn.classList.add('wrong');fb.textContent=timeout?'⏰ Время!':'❌ Не то!';fb.style.color='var(--color-error)';}
+  const reactionEl=document.getElementById('g1-reaction');
+
+  if(ok){
+    g1.score++;
+    g1.times.push(elapsed);
+    document.getElementById('g1-score').textContent=g1.score;
+    btn.classList.add('correct');
+    fb.textContent='✅ Правильно!';fb.style.color='var(--color-success)';
+    reactionEl.textContent=`⚡ ${elapsed} мс`;
+  } else {
+    fb.textContent=timeout?'⏰ Время!':'❌ Не то!';
+    fb.style.color='var(--color-error)';
+    reactionEl.textContent=timeout?'⏰ Время вышло':'❌ Ошибка';
+    if(btn)btn.classList.add('wrong');
+  }
   allTimers.push(setTimeout(g1Round,1000));
 }
 
@@ -53,30 +103,64 @@ const G2_SETS=[
   {main:'🚗',odd:'🚕'},{main:'🌺',odd:'🌸'},{main:'🐟',odd:'🐠'},
   {main:'🏠',odd:'🏡'},{main:'🎈',odd:'🎉'},
 ];
-let g2={score:0,lives:3,round:0,locked:false};
+let g2={score:0,lives:3,round:0,locked:false,errors:0,timerStart:0,timerRaf:null};
 
 function initG2(){
-  g2={score:0,lives:3,round:0,locked:false};
+  g2={score:0,lives:3,round:0,locked:false,errors:0,timerStart:Date.now(),timerRaf:null};
   document.getElementById('g2-score').textContent=0;
   document.getElementById('g2-lives').textContent=3;
+  document.getElementById('g2-timer').textContent='⏱ 0.0 с';
   const rd=document.getElementById('g2-rounds');rd.innerHTML='';
   for(let i=0;i<8;i++){const d=document.createElement('div');d.className='round-dot';rd.appendChild(d);}
+  g2StartTimer();
   g2Round();
 }
+
+function g2StartTimer(){
+  const el=document.getElementById('g2-timer');
+  const tick=()=>{
+    if(!g2.timerRaf)return;
+    const base=(Date.now()-g2.timerStart)/1000;
+    const penalty=g2.errors*5;
+    const total=base+penalty;
+    el.textContent=`⏱ ${total.toFixed(1)} с${g2.errors>0?' (+'+g2.errors*5+'с штраф)':''}`;
+    g2.timerRaf=requestAnimationFrame(tick);
+  };
+  g2.timerRaf=requestAnimationFrame(tick);
+}
+
+function g2StopTimer(){
+  if(g2.timerRaf){cancelAnimationFrame(g2.timerRaf);g2.timerRaf=null;}
+}
+
 function g2Round(){
-  if(g2.round>=8||g2.lives<=0){showResult(g2.score>=7?'🏆':g2.score>=4?'😊':'💪',g2.lives>0?'Молодец!':'Попробуй ещё!',`Найдено: ${g2.score} из 8`,2,g2.score);return;}
-  g2.locked=false;document.getElementById('g2-feedback').textContent='';
+  if(g2.round>=8||g2.lives<=0){
+    g2StopTimer();
+    const base=(Date.now()-g2.timerStart)/1000;
+    const penalty=g2.errors*5;
+    const total=parseFloat((base+penalty).toFixed(1));
+    showResult(
+      g2.score>=7?'🏆':g2.score>=4?'😊':'💪',
+      g2.lives>0?'Молодец!':'Попробуй ещё!',
+      `Найдено: ${g2.score}/8 • Время: ${total}с • Ошибок: ${g2.errors} (+${g2.errors*5}с)`,
+      2, total
+    );
+    return;
+  }
+  g2.locked=false;
+  document.getElementById('g2-feedback').textContent='';
   const dots=document.querySelectorAll('#g2-rounds .round-dot');
   dots.forEach((d,i)=>{d.classList.toggle('done',i<g2.round);d.classList.toggle('current',i===g2.round);});
   const set=G2_SETS[g2.round%G2_SETS.length];
   const items=Array(15).fill(set.main).concat([set.odd]).sort(()=>Math.random()-0.5);
   const grid=document.getElementById('g2-grid');grid.innerHTML='';
-  items.forEach((em,i)=>{
+  items.forEach(em=>{
     const cell=document.createElement('div');cell.className='g2-cell';cell.textContent=em;
     cell.addEventListener('click',()=>g2Click(cell,em===set.odd));
     grid.appendChild(cell);
   });
 }
+
 function g2Click(cell,ok){
   if(g2.locked)return;g2.locked=true;
   const fb=document.getElementById('g2-feedback');
@@ -85,9 +169,9 @@ function g2Click(cell,ok){
     document.getElementById('g2-score').textContent=g2.score;
     fb.textContent='✅ Нашёл!';fb.style.color='var(--color-success)';
   } else {
-    cell.classList.add('wrong');g2.lives--;
+    cell.classList.add('wrong');g2.lives--;g2.errors++;
     document.getElementById('g2-lives').textContent=g2.lives;
-    fb.textContent='❌ Не то!';fb.style.color='var(--color-error)';
+    fb.textContent='❌ Не то! +5с штраф';fb.style.color='var(--color-error)';
   }
   allTimers.push(setTimeout(g2Round,1000));
 }
@@ -117,8 +201,7 @@ function g3Phase(phase,secs){
   const labels={inhale:'🌬️ Вдох',hold:'🫁 Задержи',exhale:'😮‍💨 Выдох'};
   circle.className=phase==='inhale'?'inhale':'exhale';
   phaseEl.textContent=labels[phase];
-  let t=secs;
-  counterEl.textContent=t;
+  let t=secs;counterEl.textContent=t;
   if(g3Timer)clearInterval(g3Timer);
   g3Timer=setInterval(()=>{
     t--;counterEl.textContent=t;
@@ -126,9 +209,12 @@ function g3Phase(phase,secs){
       clearInterval(g3Timer);
       if(!g3Active)return;
       if(phase==='inhale')g3Phase('hold',7);
-      else if(phase==='hold'){g3Phase('exhale',8);}
-      else{g3Cycle++;document.getElementById('g3-counter').textContent=`Цикл ${g3Cycle}`;
-        allTimers.push(setTimeout(()=>{if(g3Active)g3Phase('inhale',4);},1000));}
+      else if(phase==='hold')g3Phase('exhale',8);
+      else{
+        g3Cycle++;
+        document.getElementById('g3-counter').textContent=`Цикл ${g3Cycle}`;
+        allTimers.push(setTimeout(()=>{if(g3Active)g3Phase('inhale',4);},1000));
+      }
     }
   },1000);
 }
@@ -159,6 +245,7 @@ function initG4(){
     document.getElementById('g4-time').textContent=((Date.now()-g4Start)/1000).toFixed(1);
   },100);
 }
+
 function g4Click(cell,n){
   if(n===g4Next){
     cell.classList.add('found');cell.style.pointerEvents='none';
@@ -179,7 +266,12 @@ function g4Click(cell,n){
 let g5={level:1,score:0,seq:[],input:[],phase:'show'};
 const G5_EMOJIS=['🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐨','🐯'];
 
-function initG5(){g5={level:1,score:0,seq:[],input:[],phase:'show'};document.getElementById('g5-score').textContent=0;document.getElementById('g5-level-num').textContent=1;g5NewRound();}
+function initG5(){
+  g5={level:1,score:0,seq:[],input:[],phase:'show'};
+  document.getElementById('g5-score').textContent=0;
+  document.getElementById('g5-level-num').textContent=1;
+  g5NewRound();
+}
 function g5NewRound(){
   g5.seq=[];g5.input=[];g5.phase='show';
   const len=Math.min(3+g5.level-1,10);
@@ -200,7 +292,7 @@ function g5Show(){
   const indicators=document.querySelectorAll('#g5-seq .g5-indicator');
   let i=0;
   const showNext=()=>{
-    if(i>0){indicators[i-1].classList.remove('active');}
+    if(i>0)indicators[i-1].classList.remove('active');
     if(i>=g5.seq.length){
       allTimers.push(setTimeout(()=>{
         document.getElementById('g5-instruction').textContent='Повтори последовательность!';
@@ -239,6 +331,11 @@ function g5Pick(cell,em){
   } else {
     g5.phase='done';indicators[idx].classList.add('wrong');cell.classList.add('wrong');
     document.querySelectorAll('.g5-card').forEach(c=>c.classList.add('disabled'));
-    allTimers.push(setTimeout(()=>{cell.classList.remove('wrong');g5.level=Math.max(1,g5.level-1);document.getElementById('g5-level-num').textContent=g5.level;g5NewRound();},1300));
+    allTimers.push(setTimeout(()=>{
+      cell.classList.remove('wrong');
+      g5.level=Math.max(1,g5.level-1);
+      document.getElementById('g5-level-num').textContent=g5.level;
+      g5NewRound();
+    },1300));
   }
 }
