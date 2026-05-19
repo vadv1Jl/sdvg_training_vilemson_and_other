@@ -9,321 +9,354 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root,[data-theme="light"]{
-  --color-bg:#f0f4ff;
-  --color-surface:#ffffff;
-  --color-surface-2:#f8f9ff;
-  --color-border:#dde3f5;
-  --color-text:#1a1d2e;
-  --color-text-muted:#6b7280;
-  --color-primary:#4f6ef7;
-  --color-primary-hover:#3b56e0;
-  --color-accent:#ff6b9d;
-  --color-success:#22c55e;
-  --color-warning:#f59e0b;
-  --color-error:#ef4444;
-  --color-purple:#8b5cf6;
-  --color-orange:#f97316;
-  --radius-sm:0.5rem;
-  --radius-md:0.75rem;
-  --radius-lg:1.25rem;
-  --radius-xl:1.75rem;
-  --shadow-sm:0 2px 8px rgba(79,110,247,0.1);
-  --shadow-md:0 4px 20px rgba(79,110,247,0.15);
-  --shadow-lg:0 8px 40px rgba(79,110,247,0.2);
-  --font-body:'Nunito',sans-serif;
+  --color-bg:#f0f4ff;--color-surface:#ffffff;--color-surface-2:#f4f6ff;
+  --color-border:#dde3f5;--color-text:#1a1d2e;--color-text-muted:#6b7280;
+  --color-primary:#4f6ef7;--color-primary-hover:#3b56e0;
+  --color-accent:#ff6b9d;--color-success:#22c55e;--color-warning:#f59e0b;
+  --color-error:#ef4444;--color-purple:#8b5cf6;--color-orange:#f97316;
+  --radius-sm:0.5rem;--radius-md:0.75rem;--radius-lg:1.25rem;--radius-xl:1.75rem;
+  --shadow-sm:0 2px 8px rgba(79,110,247,0.1);--shadow-md:0 4px 20px rgba(79,110,247,0.15);
+  --shadow-lg:0 8px 40px rgba(79,110,247,0.2);--font-body:'Nunito',sans-serif;
   --transition:180ms cubic-bezier(0.16,1,0.3,1);
 }
 [data-theme="dark"]{
-  --color-bg:#0f1117;
-  --color-surface:#1a1d2e;
-  --color-surface-2:#222538;
-  --color-border:#2d3148;
-  --color-text:#e8eaf6;
-  --color-text-muted:#9ca3af;
-  --color-primary:#6b84f8;
-  --color-primary-hover:#849bfa;
+  --color-bg:#0f1117;--color-surface:#1a1d2e;--color-surface-2:#222538;
+  --color-border:#2d3148;--color-text:#e8eaf6;--color-text-muted:#9ca3af;
+  --color-primary:#6b84f8;--color-primary-hover:#849bfa;
+  --shadow-sm:0 2px 8px rgba(0,0,0,0.3);--shadow-md:0 4px 20px rgba(0,0,0,0.4);
+  --shadow-lg:0 8px 40px rgba(0,0,0,0.5);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-body{
-  font-family:var(--font-body);
-  background:var(--color-bg);
-  color:var(--color-text);
-  min-height:100dvh;
-  font-size:1rem;
-  line-height:1.6;
-}
+body{font-family:var(--font-body);background:var(--color-bg);color:var(--color-text);min-height:100dvh;font-size:1rem;line-height:1.6}
 img,svg{display:block;max-width:100%}
 button{cursor:pointer;font:inherit;color:inherit;border:none;background:none}
-/* LAYOUT */
-.app{max-width:900px;margin:0 auto;padding:1.5rem 1rem 3rem}
-.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem}
-.logo{display:flex;align-items:center;gap:0.75rem;font-size:1.4rem;font-weight:900;color:var(--color-primary)}
-.logo-icon{width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-primary);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;box-shadow:var(--shadow-sm)}
-.theme-btn{width:44px;height:44px;border-radius:var(--radius-md);background:var(--color-surface);border:1.5px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:all var(--transition)}
+input{font:inherit}
+
+/* ─── LAYOUT ─── */
+.app{max-width:960px;margin:0 auto;padding:1.5rem 1rem 3rem}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;gap:1rem;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:0.75rem;font-size:1.3rem;font-weight:900;color:var(--color-primary)}
+.logo-icon{width:42px;height:42px;border-radius:var(--radius-md);background:var(--color-primary);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;box-shadow:var(--shadow-sm);flex-shrink:0}
+.header-right{display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap}
+.theme-btn{width:40px;height:40px;border-radius:var(--radius-md);background:var(--color-surface);border:1.5px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all var(--transition);flex-shrink:0}
 .theme-btn:hover{background:var(--color-surface-2);transform:scale(1.05)}
 
-/* SCREEN system */
+/* ─── SCREENS ─── */
 .screen{display:none;animation:fadeIn 0.3s ease}
 .screen.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-/* HOME */
-.hero{text-align:center;padding:1rem 0 2rem}
-.hero h1{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:900;line-height:1.1;margin-bottom:0.75rem;background:linear-gradient(135deg,var(--color-primary),var(--color-accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{color:var(--color-text-muted);font-size:1.1rem;max-width:42ch;margin:0 auto 2rem}
-.game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:1.25rem;margin-top:1.5rem}
-.game-card{
-  background:var(--color-surface);
-  border:1.5px solid var(--color-border);
-  border-radius:var(--radius-xl);
-  padding:1.5rem;
-  cursor:pointer;
-  transition:all var(--transition);
-  box-shadow:var(--shadow-sm);
-  position:relative;
-  overflow:hidden;
+/* ─── AUTH SCREENS ─── */
+.auth-wrap{max-width:420px;margin:2rem auto}
+.auth-card{background:var(--color-surface);border:1.5px solid var(--color-border);border-radius:var(--radius-xl);padding:2.25rem 2rem;box-shadow:var(--shadow-md)}
+.auth-title{font-size:1.6rem;font-weight:900;text-align:center;margin-bottom:0.4rem}
+.auth-sub{color:var(--color-text-muted);text-align:center;font-size:0.95rem;margin-bottom:1.75rem}
+.form-group{margin-bottom:1.1rem}
+.form-label{display:block;font-weight:700;font-size:0.9rem;margin-bottom:0.4rem;color:var(--color-text-muted)}
+.form-input{
+  width:100%;padding:0.75rem 1rem;border-radius:var(--radius-md);
+  border:1.5px solid var(--color-border);background:var(--color-surface-2);
+  color:var(--color-text);font-size:1rem;transition:all var(--transition);outline:none;
 }
-.game-card::before{
-  content:'';
-  position:absolute;top:0;left:0;right:0;height:4px;
-  background:var(--card-color);
-  border-radius:var(--radius-xl) var(--radius-xl) 0 0;
-}
+.form-input:focus{border-color:var(--color-primary);box-shadow:0 0 0 3px rgba(79,110,247,0.15)}
+.form-error{color:var(--color-error);font-size:0.85rem;margin-top:0.35rem;display:none}
+.form-error.visible{display:block}
+.auth-switch{text-align:center;margin-top:1.25rem;font-size:0.9rem;color:var(--color-text-muted)}
+.auth-switch a{color:var(--color-primary);font-weight:700;cursor:pointer;text-decoration:none}
+.auth-switch a:hover{text-decoration:underline}
+
+/* ─── USER CHIP ─── */
+.user-chip{display:flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;border-radius:var(--radius-xl);background:var(--color-surface);border:1.5px solid var(--color-border);font-weight:700;font-size:0.9rem;cursor:pointer;transition:all var(--transition)}
+.user-chip:hover{background:var(--color-surface-2)}
+.user-avatar{width:28px;height:28px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.85rem;font-weight:900;flex-shrink:0}
+.logout-btn{padding:0.4rem 0.9rem;border-radius:var(--radius-md);background:transparent;border:1.5px solid var(--color-border);font-size:0.85rem;font-weight:700;color:var(--color-text-muted);transition:all var(--transition)}
+.logout-btn:hover{border-color:var(--color-error);color:var(--color-error)}
+
+/* ─── HOME ─── */
+.hero{text-align:center;padding:0.5rem 0 1.75rem}
+.hero h1{font-size:clamp(1.7rem,5vw,2.7rem);font-weight:900;line-height:1.1;margin-bottom:0.65rem;background:linear-gradient(135deg,var(--color-primary),var(--color-accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--color-text-muted);font-size:1.05rem;max-width:44ch;margin:0 auto}
+.game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(255px,100%),1fr));gap:1.1rem;margin-top:1.5rem}
+.game-card{background:var(--color-surface);border:1.5px solid var(--color-border);border-radius:var(--radius-xl);padding:1.4rem;cursor:pointer;transition:all var(--transition);box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.game-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--card-color);border-radius:var(--radius-xl) var(--radius-xl) 0 0}
 .game-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
-.card-emoji{font-size:2.5rem;margin-bottom:0.75rem}
-.card-title{font-size:1.15rem;font-weight:800;margin-bottom:0.35rem}
-.card-desc{font-size:0.9rem;color:var(--color-text-muted);line-height:1.5}
-.card-tag{display:inline-block;margin-top:0.75rem;padding:0.2rem 0.75rem;border-radius:var(--radius-xl);font-size:0.75rem;font-weight:700;background:color-mix(in oklch,var(--card-color) 12%,transparent);color:var(--card-color)}
-/* GAME UI */
-.game-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.back-btn{display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:var(--radius-md);background:var(--color-surface);border:1.5px solid var(--color-border);font-weight:700;font-size:0.9rem;transition:all var(--transition)}
+.card-emoji{font-size:2.2rem;margin-bottom:0.65rem}
+.card-title{font-size:1.1rem;font-weight:800;margin-bottom:0.3rem}
+.card-desc{font-size:0.88rem;color:var(--color-text-muted);line-height:1.5}
+.card-record{display:flex;align-items:center;justify-content:space-between;margin-top:0.85rem}
+.card-tag{display:inline-block;padding:0.18rem 0.7rem;border-radius:var(--radius-xl);font-size:0.73rem;font-weight:700;background:color-mix(in oklch,var(--card-color) 12%,transparent);color:var(--card-color)}
+.card-best{font-size:0.8rem;color:var(--color-text-muted);font-weight:600}
+.card-best b{color:var(--color-primary)}
+
+/* ─── PROFILE ─── */
+.profile-header{display:flex;align-items:center;gap:1.25rem;background:var(--color-surface);border:1.5px solid var(--color-border);border-radius:var(--radius-xl);padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)}
+.profile-avatar-big{width:60px;height:60px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;font-weight:900;flex-shrink:0}
+.profile-name{font-size:1.4rem;font-weight:900}
+.profile-since{color:var(--color-text-muted);font-size:0.9rem}
+.records-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr));gap:1rem}
+.record-card{background:var(--color-surface);border:1.5px solid var(--color-border);border-radius:var(--radius-lg);padding:1.25rem;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.record-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--card-color);border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+.record-game{font-size:1.5rem;margin-bottom:0.35rem}
+.record-title{font-size:0.95rem;font-weight:800;margin-bottom:0.75rem}
+.record-stat{display:flex;justify-content:space-between;align-items:center;padding:0.35rem 0;border-bottom:1px solid var(--color-border)}
+.record-stat:last-child{border-bottom:none}
+.record-label{font-size:0.82rem;color:var(--color-text-muted);font-weight:600}
+.record-value{font-size:1rem;font-weight:900;color:var(--color-primary)}
+.record-empty{color:var(--color-text-muted);font-size:0.88rem;text-align:center;padding:0.5rem 0}
+.leaderboard{background:var(--color-surface);border:1.5px solid var(--color-border);border-radius:var(--radius-xl);padding:1.5rem;margin-top:1.5rem;box-shadow:var(--shadow-sm)}
+.lb-title{font-size:1.1rem;font-weight:900;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
+.lb-row{display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid var(--color-border)}
+.lb-row:last-child{border-bottom:none}
+.lb-rank{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:900;background:var(--color-surface-2);flex-shrink:0}
+.lb-rank.gold{background:#fef9c3;color:#b45309}
+.lb-rank.silver{background:#f1f5f9;color:#64748b}
+.lb-rank.bronze{background:#fef3c7;color:#92400e}
+.lb-name{flex:1;font-weight:700;font-size:0.95rem}
+.lb-name.me{color:var(--color-primary)}
+.lb-score{font-weight:900;color:var(--color-primary)}
+.lb-empty{text-align:center;color:var(--color-text-muted);padding:1rem 0;font-size:0.9rem}
+
+/* ─── GAME UI ─── */
+.game-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.back-btn{display:flex;align-items:center;gap:0.4rem;padding:0.45rem 0.9rem;border-radius:var(--radius-md);background:var(--color-surface);border:1.5px solid var(--color-border);font-weight:700;font-size:0.9rem;transition:all var(--transition);white-space:nowrap}
 .back-btn:hover{background:var(--color-surface-2)}
-.game-title-bar{flex:1;font-size:1.2rem;font-weight:900}
-.stats-row{display:flex;gap:0.75rem;margin-left:auto;flex-wrap:wrap}
-.stat-chip{
-  display:flex;align-items:center;gap:0.4rem;
-  padding:0.4rem 0.85rem;
-  border-radius:var(--radius-xl);
-  background:var(--color-surface);
-  border:1.5px solid var(--color-border);
-  font-weight:800;font-size:0.9rem;
-}
-.stat-chip span{color:var(--color-text-muted);font-weight:600;font-size:0.8rem}
-/* GAME AREA */
-.game-area{
-  background:var(--color-surface);
-  border:1.5px solid var(--color-border);
-  border-radius:var(--radius-xl);
-  padding:2rem;
-  box-shadow:var(--shadow-sm);
-  min-height:350px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-}
-/* BUTTONS */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;
-  padding:0.75rem 1.75rem;
-  border-radius:var(--radius-lg);
-  font-weight:800;font-size:1rem;
-  transition:all var(--transition);
-  border:none;cursor:pointer;
-}
-.btn-primary{background:var(--color-primary);color:#fff;box-shadow:0 4px 14px rgba(79,110,247,0.4)}
-.btn-primary:hover{background:var(--color-primary-hover);transform:translateY(-2px);box-shadow:0 6px 20px rgba(79,110,247,0.45)}
+.game-title-bar{flex:1;font-size:1.15rem;font-weight:900}
+.stats-row{display:flex;gap:0.6rem;flex-wrap:wrap}
+.stat-chip{display:flex;align-items:center;gap:0.35rem;padding:0.38rem 0.8rem;border-radius:var(--radius-xl);background:var(--color-surface);border:1.5px solid var(--color-border);font-weight:800;font-size:0.88rem;white-space:nowrap}
+.stat-chip span{color:var(--color-text-muted);font-weight:600;font-size:0.78rem}
+.game-area{background:var(--color-surface);border:1.5px solid var(--color-border);border-radius:var(--radius-xl);padding:1.75rem;box-shadow:var(--shadow-sm);min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+
+/* ─── BUTTONS ─── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.7rem 1.6rem;border-radius:var(--radius-lg);font-weight:800;font-size:1rem;transition:all var(--transition);border:none;cursor:pointer}
+.btn-primary{background:var(--color-primary);color:#fff;box-shadow:0 4px 14px rgba(79,110,247,0.35)}
+.btn-primary:hover{background:var(--color-primary-hover);transform:translateY(-2px);box-shadow:0 6px 20px rgba(79,110,247,0.4)}
 .btn-secondary{background:var(--color-surface-2);color:var(--color-text);border:1.5px solid var(--color-border)}
 .btn-secondary:hover{background:var(--color-surface);transform:translateY(-2px)}
-.btn-lg{padding:1rem 2.5rem;font-size:1.15rem;border-radius:var(--radius-xl)}
+.btn-lg{padding:0.9rem 2.25rem;font-size:1.1rem;border-radius:var(--radius-xl)}
 
-/* ============================================================
-   GAME 1: «Поймай цвет»
-   ============================================================ */
-#g1-instruction{font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;text-align:center;color:var(--color-text-muted)}
-#g1-target{
-  font-size:2rem;font-weight:900;padding:0.5rem 1.5rem;
-  border-radius:var(--radius-lg);margin-bottom:1.75rem;
-  border:2.5px solid currentColor;
-}
-#g1-options{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:1rem}
-.g1-btn{
-  width:80px;height:80px;border-radius:50%;border:3px solid transparent;
-  cursor:pointer;transition:all var(--transition);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.5rem;box-shadow:var(--shadow-sm);
-}
+/* ─── TIMER ─── */
+#timer-bar-wrap{width:100%;height:7px;background:var(--color-border);border-radius:var(--radius-xl);overflow:hidden;margin-bottom:1.25rem}
+#timer-bar{height:100%;background:var(--color-primary);border-radius:var(--radius-xl);transition:background 0.3s}
+
+/* ─── GAME 1 ─── */
+#g1-target{font-size:1.9rem;font-weight:900;padding:0.45rem 1.4rem;border-radius:var(--radius-lg);margin-bottom:1.5rem;border:2.5px solid currentColor}
+#g1-options{display:flex;flex-wrap:wrap;gap:0.9rem;justify-content:center;margin-bottom:0.75rem}
+.g1-btn{width:74px;height:74px;border-radius:50%;border:3px solid transparent;cursor:pointer;transition:all var(--transition);box-shadow:var(--shadow-sm)}
 .g1-btn:hover{transform:scale(1.12);box-shadow:var(--shadow-md)}
-.g1-btn.correct{border-color:#22c55e;box-shadow:0 0 20px rgba(34,197,94,0.5)!important}
-.g1-btn.wrong{border-color:#ef4444;box-shadow:0 0 20px rgba(239,68,68,0.4)!important}
-#g1-feedback{font-size:1.3rem;font-weight:800;height:2rem;text-align:center}
+.g1-btn.correct{border-color:#22c55e!important;box-shadow:0 0 20px rgba(34,197,94,0.5)!important}
+.g1-btn.wrong{border-color:#ef4444!important;box-shadow:0 0 16px rgba(239,68,68,0.4)!important}
+#g1-feedback{font-size:1.2rem;font-weight:800;height:2rem;text-align:center}
 
-/* ============================================================
-   GAME 2: «Найди лишнее»
-   ============================================================ */
-#g2-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:0.75rem;margin-bottom:1.25rem;max-width:440px;
-}
-.g2-cell{
-  aspect-ratio:1;border-radius:var(--radius-lg);border:2.5px solid var(--color-border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:2.2rem;cursor:pointer;transition:all var(--transition);
-  background:var(--color-surface-2);
-}
-.g2-cell:hover{transform:scale(1.1);border-color:var(--color-primary);background:color-mix(in oklch,var(--color-primary) 10%,var(--color-surface))}
+/* ─── GAME 2 ─── */
+#g2-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.65rem;margin-bottom:1.1rem;max-width:420px}
+.g2-cell{aspect-ratio:1;border-radius:var(--radius-lg);border:2.5px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;transition:all var(--transition);background:var(--color-surface-2)}
+.g2-cell:hover{transform:scale(1.08);border-color:var(--color-primary)}
 .g2-cell.correct{border-color:var(--color-success)!important;background:color-mix(in oklch,var(--color-success) 15%,var(--color-surface))!important;animation:pop 0.4s ease}
-.g2-cell.wrong{border-color:var(--color-error)!important;background:color-mix(in oklch,var(--color-error) 15%,var(--color-surface))!important;animation:shake 0.4s ease}
-@keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-#g2-instruction{font-size:1rem;color:var(--color-text-muted);margin-bottom:1rem;text-align:center}
-#g2-feedback{font-size:1.2rem;font-weight:800;text-align:center;min-height:2rem}
+.g2-cell.wrong{border-color:var(--color-error)!important;animation:shake 0.4s ease}
+.round-indicator{display:flex;gap:0.35rem;justify-content:center;margin-bottom:0.9rem}
+.round-dot{width:9px;height:9px;border-radius:50%;background:var(--color-border);transition:background 0.3s}
+.round-dot.done{background:var(--color-primary)}
+.round-dot.current{background:var(--color-accent)}
+#g2-feedback{font-size:1.1rem;font-weight:800;text-align:center;min-height:1.8rem}
 
-/* ============================================================
-   GAME 3: «Пауза» (дыхание)
-   ============================================================ */
-#g3-circle{
-  width:160px;height:160px;border-radius:50%;
-  background:var(--color-primary);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1rem;font-weight:800;color:#fff;text-align:center;
-  box-shadow:0 0 0 0 rgba(79,110,247,0.4);
-  transition:transform 4s ease,box-shadow 4s ease;
-  margin:1.5rem auto;
-}
-#g3-circle.inhale{transform:scale(1.5);box-shadow:0 0 0 40px rgba(79,110,247,0.0)}
-#g3-circle.exhale{transform:scale(1);box-shadow:0 0 0 0 rgba(79,110,247,0.4)}
-#g3-phase{font-size:1.5rem;font-weight:900;text-align:center;margin-top:0.5rem}
-#g3-counter{font-size:1.1rem;color:var(--color-text-muted);text-align:center;margin-top:0.5rem}
-#g3-desc{font-size:0.95rem;color:var(--color-text-muted);text-align:center;max-width:38ch;margin:0 auto 1.5rem}
+/* ─── GAME 3 ─── */
+#g3-circle{width:150px;height:150px;border-radius:50%;background:var(--color-primary);display:flex;align-items:center;justify-content:center;font-size:0.95rem;font-weight:800;color:#fff;text-align:center;transition:transform 4s ease,box-shadow 4s ease;margin:1.25rem auto}
+#g3-circle.inhale{transform:scale(1.5);box-shadow:0 0 0 40px rgba(79,110,247,0)}
+#g3-circle.exhale{transform:scale(1)}
+#g3-phase{font-size:1.4rem;font-weight:900;text-align:center}
+#g3-counter{font-size:1rem;color:var(--color-text-muted);text-align:center;margin-top:0.25rem}
 
-/* ============================================================
-   GAME 4: «Шульте» (таблица)
-   ============================================================ */
-#g4-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:0.4rem;max-width:380px;margin:1rem auto;
-}
-.g4-cell{
-  aspect-ratio:1;border-radius:var(--radius-sm);border:2px solid var(--color-border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.3rem;font-weight:900;cursor:pointer;transition:all var(--transition);
-  background:var(--color-surface-2);
-}
+/* ─── GAME 4 ─── */
+#g4-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0.35rem;max-width:370px;margin:0.75rem auto}
+.g4-cell{aspect-ratio:1;border-radius:var(--radius-sm);border:2px solid var(--color-border);display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;cursor:pointer;transition:all var(--transition);background:var(--color-surface-2)}
 .g4-cell:hover{background:color-mix(in oklch,var(--color-primary) 12%,var(--color-surface));border-color:var(--color-primary)}
 .g4-cell.found{background:color-mix(in oklch,var(--color-success) 20%,var(--color-surface));border-color:var(--color-success);color:var(--color-success);animation:pop 0.3s ease}
 .g4-cell.error{animation:shake 0.4s ease;border-color:var(--color-error)}
-#g4-target{font-size:1.5rem;font-weight:900;text-align:center;margin-bottom:0.5rem}
-#g4-target span{color:var(--color-primary);font-size:2.2rem}
-#g4-feedback{text-align:center;font-size:1rem;color:var(--color-text-muted);margin-top:0.5rem}
 
-/* ============================================================
-   GAME 5: «Запомни» (память)
-   ============================================================ */
-#g5-seq{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;margin:1rem 0}
-.g5-indicator{
-  width:22px;height:22px;border-radius:50%;
-  background:var(--color-border);transition:all 0.3s ease;
-}
+/* ─── GAME 5 ─── */
+#g5-seq{display:flex;gap:0.65rem;justify-content:center;flex-wrap:wrap;margin:0.75rem 0}
+.g5-indicator{width:20px;height:20px;border-radius:50%;background:var(--color-border);transition:all 0.3s}
 .g5-indicator.active{background:var(--color-primary);box-shadow:0 0 10px rgba(79,110,247,0.5)}
 .g5-indicator.correct{background:var(--color-success)}
 .g5-indicator.wrong{background:var(--color-error)}
-#g5-cards{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin:1.25rem 0}
-.g5-card{
-  width:72px;height:72px;border-radius:var(--radius-lg);
-  display:flex;align-items:center;justify-content:center;
-  font-size:2rem;cursor:pointer;border:2.5px solid transparent;
-  transition:all var(--transition);background:var(--color-surface-2);
-}
+#g5-cards{display:flex;flex-wrap:wrap;gap:0.85rem;justify-content:center;margin:1rem 0}
+.g5-card{width:68px;height:68px;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:1.9rem;cursor:pointer;border:2.5px solid transparent;transition:all var(--transition);background:var(--color-surface-2)}
 .g5-card:hover:not(.disabled){transform:scale(1.1);border-color:var(--color-primary)}
 .g5-card.highlight{background:var(--color-primary);transform:scale(1.15);box-shadow:var(--shadow-md)}
 .g5-card.correct{border-color:var(--color-success)!important;animation:pop 0.3s ease}
 .g5-card.wrong{border-color:var(--color-error)!important;animation:shake 0.4s ease}
-.g5-card.disabled{cursor:not-allowed;opacity:0.7}
-#g5-instruction{text-align:center;font-size:1rem;font-weight:700;color:var(--color-text-muted);margin-bottom:0.5rem}
-#g5-level{text-align:center;font-size:0.9rem;color:var(--color-text-muted)}
+.g5-card.disabled{cursor:not-allowed;opacity:0.6}
 
-/* RESULTS */
-.result-box{text-align:center;padding:2rem 1rem}
-.result-emoji{font-size:4rem;margin-bottom:0.75rem;animation:pop 0.5s ease}
-.result-title{font-size:1.8rem;font-weight:900;margin-bottom:0.5rem}
-.result-score{font-size:1.1rem;color:var(--color-text-muted);margin-bottom:1.75rem}
-.result-btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+/* ─── RESULT ─── */
+.result-box{text-align:center;padding:1.75rem 1rem}
+.result-emoji{font-size:3.8rem;margin-bottom:0.65rem;animation:pop 0.5s ease;display:block}
+.result-title{font-size:1.7rem;font-weight:900;margin-bottom:0.4rem}
+.result-score{color:var(--color-text-muted);margin-bottom:0.5rem}
+.result-record{background:color-mix(in oklch,var(--color-warning) 12%,transparent);color:var(--color-warning);font-weight:800;padding:0.4rem 1.1rem;border-radius:var(--radius-xl);font-size:0.9rem;display:inline-block;margin-bottom:1.5rem}
+.result-btn-row{display:flex;gap:0.85rem;justify-content:center;flex-wrap:wrap}
 
-/* TIMER */
-#timer-bar-wrap{width:100%;height:8px;background:var(--color-border);border-radius:var(--radius-xl);overflow:hidden;margin-bottom:1.25rem}
-#timer-bar{height:100%;background:var(--color-primary);border-radius:var(--radius-xl);transition:width 0.1s linear}
+/* ─── ANIMATIONS ─── */
+@keyframes pop{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 
-/* progress indicator */
-.round-indicator{display:flex;gap:0.4rem;justify-content:center;margin-bottom:1rem}
-.round-dot{width:10px;height:10px;border-radius:50%;background:var(--color-border);transition:background 0.3s}
-.round-dot.done{background:var(--color-primary)}
-.round-dot.current{background:var(--color-accent)}
+/* ─── SECTION TITLE ─── */
+.section-title{font-size:1.1rem;font-weight:900;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem}
+.tab-row{display:flex;gap:0.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.tab-btn{padding:0.5rem 1.25rem;border-radius:var(--radius-xl);font-weight:700;font-size:0.9rem;border:1.5px solid var(--color-border);background:transparent;transition:all var(--transition);color:var(--color-text-muted)}
+.tab-btn.active{background:var(--color-primary);color:#fff;border-color:var(--color-primary)}
+.tab-btn:hover:not(.active){background:var(--color-surface-2)}
+.tab-content{display:none}
+.tab-content.active{display:block}
 </style>
 </head>
 <body>
 <div class="app">
+
   <!-- HEADER -->
   <header class="header">
-    <div class="logo">
+    <div class="logo" onclick="if(currentUser)goHome()" style="cursor:pointer">
       <div class="logo-icon">🧠</div>
       Тренажёр внимания
     </div>
-    <button class="theme-btn" data-theme-toggle aria-label="Сменить тему">🌙</button>
+    <div class="header-right" id="header-right">
+      <button class="theme-btn" data-theme-toggle aria-label="Сменить тему">🌙</button>
+    </div>
   </header>
 
-  <!-- ==================== HOME ==================== -->
-  <div id="screen-home" class="screen active">
-    <div class="hero">
-      <h1>Тренируем<br>внимание вместе!</h1>
-      <p>5 игр, которые помогают развивать концентрацию, память и самоконтроль</p>
-    </div>
-    <div class="game-grid">
-      <div class="game-card" style="--card-color:#4f6ef7" onclick="startGame(1)">
-        <div class="card-emoji">🎨</div>
-        <div class="card-title">Поймай цвет</div>
-        <div class="card-desc">Найди шарик нужного цвета как можно быстрее</div>
-        <span class="card-tag">Концентрация</span>
-      </div>
-      <div class="game-card" style="--card-color:#f97316" onclick="startGame(2)">
-        <div class="card-emoji">🔍</div>
-        <div class="card-title">Найди лишнее</div>
-        <div class="card-desc">Среди похожих картинок есть одна отличающаяся — найди её</div>
-        <span class="card-tag">Внимание</span>
-      </div>
-      <div class="game-card" style="--card-color:#22c55e" onclick="startGame(3)">
-        <div class="card-emoji">🌬️</div>
-        <div class="card-title">Пауза</div>
-        <div class="card-desc">Дыхательное упражнение для успокоения и сосредоточения</div>
-        <span class="card-tag">Саморегуляция</span>
-      </div>
-      <div class="game-card" style="--card-color:#8b5cf6" onclick="startGame(4)">
-        <div class="card-emoji">🔢</div>
-        <div class="card-title">Таблица Шульте</div>
-        <div class="card-desc">Нажимай числа по порядку — развивай зрительное внимание</div>
-        <span class="card-tag">Распределение</span>
-      </div>
-      <div class="game-card" style="--card-color:#ff6b9d" onclick="startGame(5)">
-        <div class="card-emoji">🧩</div>
-        <div class="card-title">Запомни ряд</div>
-        <div class="card-desc">Запомни последовательность картинок и повтори её</div>
-        <span class="card-tag">Память</span>
+  <!-- ══════════ AUTH: LOGIN ══════════ -->
+  <div id="screen-login" class="screen active">
+    <div class="auth-wrap">
+      <div class="auth-card">
+        <div class="auth-title">👋 Добро пожаловать!</div>
+        <div class="auth-sub">Войди, чтобы сохранять свои рекорды</div>
+        <div class="form-group">
+          <label class="form-label" for="li-login">Логин</label>
+          <input class="form-input" id="li-login" type="text" placeholder="Введи логин" autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="li-pass">Пароль</label>
+          <input class="form-input" id="li-pass" type="password" placeholder="Введи пароль" autocomplete="current-password">
+          <div class="form-error" id="li-error">Неверный логин или пароль</div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;margin-top:0.5rem" onclick="doLogin()">Войти →</button>
+        <div class="auth-switch">Нет аккаунта? <a onclick="showScreen('screen-register')">Зарегистрироваться</a></div>
+        <div class="auth-switch" style="margin-top:0.5rem"><a onclick="guestMode()" style="font-size:0.85rem;color:var(--color-text-muted);font-weight:600">Войти как гость</a></div>
       </div>
     </div>
   </div>
 
-  <!-- ==================== GAME 1: Поймай цвет ==================== -->
+  <!-- ══════════ AUTH: REGISTER ══════════ -->
+  <div id="screen-register" class="screen">
+    <div class="auth-wrap">
+      <div class="auth-card">
+        <div class="auth-title">📝 Регистрация</div>
+        <div class="auth-sub">Создай аккаунт и начни тренировку</div>
+        <div class="form-group">
+          <label class="form-label" for="reg-name">Имя</label>
+          <input class="form-input" id="reg-name" type="text" placeholder="Как тебя зовут?">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-login">Логин</label>
+          <input class="form-input" id="reg-login" type="text" placeholder="Придумай логин">
+          <div class="form-error" id="reg-error-login">Такой логин уже занят</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-pass">Пароль</label>
+          <input class="form-input" id="reg-pass" type="password" placeholder="Придумай пароль">
+          <div class="form-error" id="reg-error-pass">Пароль слишком короткий (минимум 4 символа)</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-pass2">Повтори пароль</label>
+          <input class="form-input" id="reg-pass2" type="password" placeholder="Повтори пароль">
+          <div class="form-error" id="reg-error-match">Пароли не совпадают</div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;margin-top:0.5rem" onclick="doRegister()">Создать аккаунт →</button>
+        <div class="auth-switch">Уже есть аккаунт? <a onclick="showScreen('screen-login')">Войти</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ HOME ══════════ -->
+  <div id="screen-home" class="screen">
+    <div class="hero">
+      <h1>Тренируем внимание!</h1>
+      <p>5 игр для развития концентрации, памяти и самоконтроля</p>
+    </div>
+    <div class="tab-row">
+      <button class="tab-btn active" onclick="switchTab('games')">🎮 Игры</button>
+      <button class="tab-btn" onclick="switchTab('profile')">👤 Профиль</button>
+      <button class="tab-btn" onclick="switchTab('leaderboard')">🏆 Рейтинг</button>
+    </div>
+
+    <!-- TAB: GAMES -->
+    <div class="tab-content active" id="tab-games">
+      <div class="game-grid">
+        <div class="game-card" style="--card-color:#4f6ef7" onclick="startGame(1)">
+          <div class="card-emoji">🎨</div>
+          <div class="card-title">Поймай цвет</div>
+          <div class="card-desc">Найди шарик нужного цвета за 5 секунд</div>
+          <div class="card-record"><span class="card-tag">Концентрация</span><span class="card-best" id="best-1"></span></div>
+        </div>
+        <div class="game-card" style="--card-color:#f97316" onclick="startGame(2)">
+          <div class="card-emoji">🔍</div>
+          <div class="card-title">Найди лишнее</div>
+          <div class="card-desc">Среди похожих есть одна отличающаяся</div>
+          <div class="card-record"><span class="card-tag">Внимание</span><span class="card-best" id="best-2"></span></div>
+        </div>
+        <div class="game-card" style="--card-color:#22c55e" onclick="startGame(3)">
+          <div class="card-emoji">🌬️</div>
+          <div class="card-title">Пауза</div>
+          <div class="card-desc">Дыхательное упражнение для саморегуляции</div>
+          <div class="card-record"><span class="card-tag">Саморегуляция</span><span class="card-best" id="best-3"></span></div>
+        </div>
+        <div class="game-card" style="--card-color:#8b5cf6" onclick="startGame(4)">
+          <div class="card-emoji">🔢</div>
+          <div class="card-title">Таблица Шульте</div>
+          <div class="card-desc">Числа от 1 до 25 — как можно быстрее</div>
+          <div class="card-record"><span class="card-tag">Распределение</span><span class="card-best" id="best-4"></span></div>
+        </div>
+        <div class="game-card" style="--card-color:#ff6b9d" onclick="startGame(5)">
+          <div class="card-emoji">🧩</div>
+          <div class="card-title">Запомни ряд</div>
+          <div class="card-desc">Запомни и повтори последовательность</div>
+          <div class="card-record"><span class="card-tag">Память</span><span class="card-best" id="best-5"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: PROFILE -->
+    <div class="tab-content" id="tab-profile">
+      <div class="profile-header">
+        <div class="profile-avatar-big" id="profile-avatar-big">?</div>
+        <div>
+          <div class="profile-name" id="profile-name-big">—</div>
+          <div class="profile-since" id="profile-since">—</div>
+        </div>
+      </div>
+      <div class="section-title">📊 Мои рекорды</div>
+      <div class="records-grid" id="records-grid"></div>
+    </div>
+
+    <!-- TAB: LEADERBOARD -->
+    <div class="tab-content" id="tab-leaderboard">
+      <div class="section-title">🏆 Общий рейтинг</div>
+      <div class="leaderboard" id="leaderboard-box"></div>
+    </div>
+  </div>
+
+  <!-- ══════════ GAME SCREENS ══════════ -->
   <div id="screen-1" class="screen">
     <div class="game-header">
       <button class="back-btn" onclick="goHome()">← Назад</button>
       <div class="game-title-bar">🎨 Поймай цвет</div>
       <div class="stats-row">
-        <div class="stat-chip">✅ <span>Очки:</span> <b id="g1-score">0</b></div>
-        <div class="stat-chip">⏱️ <span>Раунд:</span> <b id="g1-round">1</b>/10</div>
+        <div class="stat-chip">✅ <span>Очки:</span><b id="g1-score">0</b></div>
+        <div class="stat-chip">🔄 <b id="g1-round">1</b>/10</div>
       </div>
     </div>
     <div class="game-area">
-      <div id="g1-instruction">Найди шарик цвета:</div>
+      <div style="color:var(--color-text-muted);font-size:1rem;font-weight:700;margin-bottom:1rem">Найди шарик цвета:</div>
       <div id="g1-target"></div>
       <div id="timer-bar-wrap"><div id="timer-bar" style="width:100%"></div></div>
       <div id="g1-options"></div>
@@ -331,445 +364,493 @@ button{cursor:pointer;font:inherit;color:inherit;border:none;background:none}
     </div>
   </div>
 
-  <!-- ==================== GAME 2: Найди лишнее ==================== -->
   <div id="screen-2" class="screen">
     <div class="game-header">
       <button class="back-btn" onclick="goHome()">← Назад</button>
       <div class="game-title-bar">🔍 Найди лишнее</div>
       <div class="stats-row">
-        <div class="stat-chip">✅ <span>Очки:</span> <b id="g2-score">0</b></div>
-        <div class="stat-chip">❤️ <b id="g2-lives">3</b>/3</div>
+        <div class="stat-chip">✅<b id="g2-score">0</b></div>
+        <div class="stat-chip">❤️<b id="g2-lives">3</b></div>
       </div>
     </div>
     <div class="game-area">
-      <div id="g2-instruction">Найди картинку, которая отличается от остальных!</div>
+      <div style="color:var(--color-text-muted);font-size:0.95rem;margin-bottom:0.75rem">Найди картинку, которая отличается!</div>
       <div class="round-indicator" id="g2-rounds"></div>
       <div id="g2-grid"></div>
       <div id="g2-feedback"></div>
     </div>
   </div>
 
-  <!-- ==================== GAME 3: Пауза ==================== -->
   <div id="screen-3" class="screen">
     <div class="game-header">
       <button class="back-btn" onclick="goHome()">← Назад</button>
       <div class="game-title-bar">🌬️ Пауза — дыхание</div>
     </div>
     <div class="game-area">
-      <p id="g3-desc">Это упражнение поможет успокоиться и сосредоточиться. Следи за кругом и дыши вместе с ним.</p>
+      <p style="color:var(--color-text-muted);text-align:center;max-width:38ch;margin-bottom:1rem">Следи за кругом и дыши вместе с ним. Техника 4-7-8 успокаивает нервную систему.</p>
       <div id="g3-circle">Готов?</div>
       <div id="g3-phase"></div>
-      <div id="g3-counter"></div>
-      <div style="margin-top:1.5rem;display:flex;gap:1rem;justify-content:center">
+      <div id="g3-counter" style="margin-bottom:1.5rem"></div>
+      <div style="display:flex;gap:0.85rem;justify-content:center">
         <button class="btn btn-primary btn-lg" id="g3-start-btn" onclick="startBreathing()">▶ Начать</button>
         <button class="btn btn-secondary btn-lg" id="g3-stop-btn" style="display:none" onclick="stopBreathing()">⏹ Стоп</button>
       </div>
     </div>
   </div>
 
-  <!-- ==================== GAME 4: Шульте ==================== -->
   <div id="screen-4" class="screen">
     <div class="game-header">
       <button class="back-btn" onclick="goHome()">← Назад</button>
       <div class="game-title-bar">🔢 Таблица Шульте</div>
       <div class="stats-row">
-        <div class="stat-chip">⏱️ <b id="g4-time">0</b>с</div>
-        <div class="stat-chip">🔢 <b id="g4-next">1</b></div>
+        <div class="stat-chip">⏱️<b id="g4-time">0</b>с</div>
+        <div class="stat-chip">→<b id="g4-next">1</b></div>
       </div>
     </div>
     <div class="game-area">
-      <div id="g4-target">Найди: <span id="g4-target-num">1</span></div>
+      <div style="font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:0.5rem">Найди: <span id="g4-target-num" style="color:var(--color-primary);font-size:1.9rem">1</span></div>
       <div id="g4-grid"></div>
-      <div id="g4-feedback">Нажимай числа от 1 до 25 по порядку!</div>
+      <div id="g4-feedback" style="text-align:center;font-size:0.9rem;color:var(--color-text-muted);margin-top:0.5rem">Нажимай числа от 1 до 25 по порядку!</div>
     </div>
   </div>
 
-  <!-- ==================== GAME 5: Запомни ==================== -->
   <div id="screen-5" class="screen">
     <div class="game-header">
       <button class="back-btn" onclick="goHome()">← Назад</button>
       <div class="game-title-bar">🧩 Запомни ряд</div>
       <div class="stats-row">
-        <div class="stat-chip">🏆 <span>Уровень:</span> <b id="g5-level-num">1</b></div>
-        <div class="stat-chip">✅ <b id="g5-score">0</b></div>
+        <div class="stat-chip">🏆 Ур.<b id="g5-level-num">1</b></div>
+        <div class="stat-chip">✅<b id="g5-score">0</b></div>
       </div>
     </div>
     <div class="game-area">
-      <div id="g5-instruction">Запоминай...</div>
+      <div id="g5-instruction" style="text-align:center;font-size:1rem;font-weight:700;color:var(--color-text-muted);margin-bottom:0.5rem">Запоминай...</div>
       <div id="g5-seq"></div>
       <div id="g5-cards"></div>
-      <div id="g5-level"></div>
+      <div id="g5-level" style="text-align:center;font-size:0.85rem;color:var(--color-text-muted)"></div>
     </div>
   </div>
 
-  <!-- ==================== RESULTS ==================== -->
+  <!-- ══════════ RESULT ══════════ -->
   <div id="screen-result" class="screen">
     <div class="game-area">
       <div class="result-box">
-        <div class="result-emoji" id="result-emoji">🎉</div>
+        <span class="result-emoji" id="result-emoji">🎉</span>
         <div class="result-title" id="result-title">Молодец!</div>
         <div class="result-score" id="result-score"></div>
+        <div id="result-record-badge" style="display:none" class="result-record">🏆 Новый рекорд!</div>
         <div class="result-btn-row">
-          <button class="btn btn-primary btn-lg" id="result-replay" onclick="">🔄 Ещё раз</button>
+          <button class="btn btn-primary btn-lg" id="result-replay">🔄 Ещё раз</button>
           <button class="btn btn-secondary btn-lg" onclick="goHome()">🏠 На главную</button>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+</div><!-- /app -->
 
 <script>
-// ── Theme toggle ──────────────────────────────────────────
+/* ══════════════════════════════════════════════
+   DATA LAYER — localStorage
+══════════════════════════════════════════════ */
+const DB_KEY='sdvg_users';
+const SESSION_KEY='sdvg_session';
+
+function loadUsers(){try{return JSON.parse(localStorage.getItem(DB_KEY))||{}}catch{return{}}}
+function saveUsers(u){localStorage.setItem(DB_KEY,JSON.stringify(u))}
+function loadSession(){try{return localStorage.getItem(SESSION_KEY)||null}catch{return null}}
+function saveSession(login){try{localStorage.setItem(SESSION_KEY,login)}catch{}}
+function clearSession(){try{localStorage.removeItem(SESSION_KEY)}catch{}}
+
+let currentUser=null; // {login, name, since, records:{1:{score,date},…}}
+
+function hashPass(p){
+  let h=0;for(let i=0;i<p.length;i++){h=((h<<5)-h)+p.charCodeAt(i);h|=0}return h.toString(16);
+}
+
+/* ══════════════════════════════════════════════
+   THEME
+══════════════════════════════════════════════ */
 (function(){
   const btn=document.querySelector('[data-theme-toggle]');
   const html=document.documentElement;
   let dark=matchMedia('(prefers-color-scheme:dark)').matches;
+  try{if(localStorage.getItem('sdvg_theme'))dark=localStorage.getItem('sdvg_theme')==='dark'}catch{}
   const apply=()=>{html.setAttribute('data-theme',dark?'dark':'light');if(btn)btn.textContent=dark?'☀️':'🌙'};
   apply();
-  if(btn)btn.addEventListener('click',()=>{dark=!dark;apply()});
+  if(btn)btn.addEventListener('click',()=>{dark=!dark;apply();try{localStorage.setItem('sdvg_theme',dark?'dark':'light')}catch{}});
 })();
 
-// ── Screen management ─────────────────────────────────────
+/* ══════════════════════════════════════════════
+   SCREEN MANAGEMENT
+══════════════════════════════════════════════ */
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
+
+let activeTab='games';
+function switchTab(tab){
+  activeTab=tab;
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    const tabs=['games','profile','leaderboard'];
+    b.classList.toggle('active',tabs[i]===tab);
+  });
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  if(tab==='profile')renderProfile();
+  if(tab==='leaderboard')renderLeaderboard();
+}
+
+/* ══════════════════════════════════════════════
+   AUTH
+══════════════════════════════════════════════ */
+function doLogin(){
+  const login=document.getElementById('li-login').value.trim();
+  const pass=document.getElementById('li-pass').value;
+  const err=document.getElementById('li-error');
+  err.classList.remove('visible');
+  const users=loadUsers();
+  if(!users[login]||users[login].passHash!==hashPass(pass)){err.classList.add('visible');return}
+  loginAs(login,users[login]);
+}
+document.getElementById('li-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
+document.getElementById('li-login').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('li-pass').focus()});
+
+function doRegister(){
+  const name=document.getElementById('reg-name').value.trim();
+  const login=document.getElementById('reg-login').value.trim();
+  const pass=document.getElementById('reg-pass').value;
+  const pass2=document.getElementById('reg-pass2').value;
+  ['reg-error-login','reg-error-pass','reg-error-match'].forEach(id=>document.getElementById(id).classList.remove('visible'));
+  let ok=true;
+  const users=loadUsers();
+  if(users[login]){document.getElementById('reg-error-login').classList.add('visible');ok=false}
+  if(pass.length<4){document.getElementById('reg-error-pass').classList.add('visible');ok=false}
+  if(pass!==pass2){document.getElementById('reg-error-match').classList.add('visible');ok=false}
+  if(!ok)return;
+  const userData={passHash:hashPass(pass),name:name||login,since:new Date().toLocaleDateString('ru-RU'),records:{}};
+  users[login]=userData;saveUsers(users);
+  loginAs(login,userData);
+}
+
+function loginAs(login,userData){
+  currentUser={login,...userData};
+  saveSession(login);
+  renderHeader();
+  updateBestBadges();
+  showScreen('screen-home');
+  switchTab('games');
+}
+function guestMode(){currentUser={login:'guest',name:'Гость',since:'—',records:{}};renderHeader();updateBestBadges();showScreen('screen-home')}
+
+function doLogout(){
+  stopBreathing();clearAllTimers();
+  currentUser=null;clearSession();
+  renderHeader();
+  showScreen('screen-login');
+}
+
+function renderHeader(){
+  const hr=document.getElementById('header-right');
+  if(!currentUser){hr.innerHTML='<button class="theme-btn" data-theme-toggle>🌙</button>';return}
+  const initials=currentUser.name?currentUser.name[0].toUpperCase():'?';
+  hr.innerHTML=`
+    <div class="user-chip" onclick="switchTab('profile');showScreen('screen-home')">
+      <div class="user-avatar">${initials}</div>${currentUser.name}
+    </div>
+    <button class="logout-btn" onclick="doLogout()">Выйти</button>
+    <button class="theme-btn" data-theme-toggle>🌙</button>
+  `;
+  // re-bind theme
+  const btn=hr.querySelector('[data-theme-toggle]');
+  if(btn){
+    const html=document.documentElement;
+    btn.textContent=html.getAttribute('data-theme')==='dark'?'☀️':'🌙';
+    btn.addEventListener('click',()=>{
+      const dark=html.getAttribute('data-theme')!=='dark';
+      html.setAttribute('data-theme',dark?'dark':'light');
+      btn.textContent=dark?'☀️':'🌙';
+      try{localStorage.setItem('sdvg_theme',dark?'dark':'light')}catch{}
+    });
+  }
+}
+
+/* ══════════════════════════════════════════════
+   RECORDS
+══════════════════════════════════════════════ */
+const GAME_INFO={
+  1:{emoji:'🎨',name:'Поймай цвет',unit:'очков',color:'#4f6ef7',higher:true},
+  2:{emoji:'🔍',name:'Найди лишнее',unit:'очков',color:'#f97316',higher:true},
+  3:{emoji:'🌬️',name:'Пауза',unit:'раундов',color:'#22c55e',higher:true},
+  4:{emoji:'🔢',name:'Таблица Шульте',unit:'сек',color:'#8b5cf6',higher:false},
+  5:{emoji:'🧩',name:'Запомни ряд',unit:'уровней',color:'#ff6b9d',higher:true},
+};
+
+function saveRecord(gameId,score){
+  if(!currentUser||currentUser.login==='guest')return false;
+  const gi=GAME_INFO[gameId];
+  const prev=currentUser.records[gameId];
+  const isNew=!prev||(gi.higher?score>prev.score:score<prev.score);
+  if(isNew){
+    currentUser.records[gameId]={score,date:new Date().toLocaleDateString('ru-RU')};
+    const users=loadUsers();
+    if(users[currentUser.login])users[currentUser.login].records=currentUser.records;
+    saveUsers(users);
+  }
+  return isNew;
+}
+
+function getBest(gameId){
+  if(!currentUser)return null;
+  return currentUser.records[gameId]||null;
+}
+
+function updateBestBadges(){
+  for(let i=1;i<=5;i++){
+    const el=document.getElementById('best-'+i);
+    if(!el)continue;
+    const b=getBest(i);
+    if(b){const gi=GAME_INFO[i];el.innerHTML=`Рекорд: <b>${b.score} ${gi.unit}</b>`}
+    else el.textContent='';
+  }
+}
+
+function renderProfile(){
+  if(!currentUser)return;
+  document.getElementById('profile-avatar-big').textContent=currentUser.name?currentUser.name[0].toUpperCase():'?';
+  document.getElementById('profile-name-big').textContent=currentUser.name;
+  document.getElementById('profile-since').textContent=currentUser.login==='guest'?'Гостевой режим':'Играет с '+currentUser.since;
+  const grid=document.getElementById('records-grid');grid.innerHTML='';
+  for(let i=1;i<=5;i++){
+    const gi=GAME_INFO[i];const b=getBest(i);
+    const card=document.createElement('div');
+    card.className='record-card';card.style.setProperty('--card-color',gi.color);
+    card.innerHTML=`<div class="record-game">${gi.emoji}</div><div class="record-title">${gi.name}</div>`+
+      (b?`<div class="record-stat"><span class="record-label">Рекорд</span><span class="record-value">${b.score} ${gi.unit}</span></div>
+          <div class="record-stat"><span class="record-label">Дата</span><span class="record-value" style="font-size:0.85rem">${b.date}</span></div>`
+        :`<div class="record-empty">Ещё не играл</div>`);
+    grid.appendChild(card);
+  }
+}
+
+function renderLeaderboard(){
+  const users=loadUsers();
+  const box=document.getElementById('leaderboard-box');
+  // compute total score for each user
+  const scores=Object.entries(users).map(([login,u])=>{
+    let total=0;
+    for(let i=1;i<=5;i++){if(u.records&&u.records[i])total+=u.records[i].score}
+    return{login,name:u.name||login,total};
+  }).sort((a,b)=>b.total-a.total).slice(0,10);
+  if(scores.length===0){box.innerHTML='<div class="lb-empty">Пока нет участников — будь первым!</div>';return}
+  const rankClasses=['gold','silver','bronze'];
+  box.innerHTML=scores.map((s,i)=>`
+    <div class="lb-row">
+      <div class="lb-rank ${rankClasses[i]||''}">${i+1}</div>
+      <div class="lb-name ${currentUser&&s.login===currentUser.login?'me':''}">${s.name} ${currentUser&&s.login===currentUser.login?'(ты)':''}</div>
+      <div class="lb-score">${s.total} очков</div>
+    </div>`).join('');
+}
+
+/* ══════════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════════ */
 function goHome(){
-  stopBreathing();
-  clearAllTimers();
+  stopBreathing();clearAllTimers();
+  updateBestBadges();
   showScreen('screen-home');
 }
-let allTimers=[];
-function clearAllTimers(){allTimers.forEach(t=>clearTimeout(t));allTimers=[];if(g4Timer){clearInterval(g4Timer);g4Timer=null}}
 
-// ── Start game dispatcher ─────────────────────────────────
+let allTimers=[];
+function clearAllTimers(){allTimers.forEach(clearTimeout);allTimers=[];if(g4Timer){clearInterval(g4Timer);g4Timer=null}}
+
 function startGame(n){
   clearAllTimers();
-  if(n===1)initG1();
-  else if(n===2)initG2();
-  else if(n===3)initG3();
-  else if(n===4)initG4();
-  else if(n===5)initG5();
+  ({1:initG1,2:initG2,3:initG3,4:initG4,5:initG5})[n]();
   showScreen('screen-'+n);
 }
 
-// ── Result screen ─────────────────────────────────────────
-function showResult(emoji,title,score,gameN){
+function showResult(emoji,title,scoreText,gameId,rawScore){
   document.getElementById('result-emoji').textContent=emoji;
   document.getElementById('result-title').textContent=title;
-  document.getElementById('result-score').textContent=score;
-  document.getElementById('result-replay').onclick=()=>startGame(gameN);
+  document.getElementById('result-score').textContent=scoreText;
+  const isNew=saveRecord(gameId,rawScore);
+  const badge=document.getElementById('result-record-badge');
+  badge.style.display=isNew?'inline-block':'none';
+  document.getElementById('result-replay').onclick=()=>startGame(gameId);
+  updateBestBadges();
   showScreen('screen-result');
 }
 
-// ══════════════════════════════════════════════════════════
-// GAME 1: Поймай цвет
-// ══════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════
+   GAME 1 — Поймай цвет
+══════════════════════════════════════════════ */
 const COLORS=[
-  {name:'Красный',hex:'#ef4444',emoji:'🔴'},
-  {name:'Синий',hex:'#3b82f6',emoji:'🔵'},
-  {name:'Зелёный',hex:'#22c55e',emoji:'🟢'},
-  {name:'Жёлтый',hex:'#facc15',emoji:'🟡'},
-  {name:'Фиолетовый',hex:'#a855f7',emoji:'🟣'},
-  {name:'Оранжевый',hex:'#f97316',emoji:'🟠'},
+  {name:'Красный',hex:'#ef4444'},{name:'Синий',hex:'#3b82f6'},
+  {name:'Зелёный',hex:'#22c55e'},{name:'Жёлтый',hex:'#facc15'},
+  {name:'Фиолетовый',hex:'#a855f7'},{name:'Оранжевый',hex:'#f97316'},
 ];
-let g1={score:0,round:0,answered:false,timer:null};
-
-function initG1(){
-  g1={score:0,round:0,answered:false,timer:null};
-  document.getElementById('g1-score').textContent=0;
-  g1Round();
-}
+let g1={score:0,round:0,answered:false,raf:null};
+function initG1(){g1={score:0,round:0,answered:false,raf:null};document.getElementById('g1-score').textContent=0;g1Round()}
 function g1Round(){
-  if(g1.round>=10){
-    const emoji=g1.score>=8?'🏆':g1.score>=5?'😊':'💪';
-    const title=g1.score>=8?'Отлично!':g1.score>=5?'Хорошо!':'Тренируйся!';
-    showResult(emoji,title,`Очки: ${g1.score} из 10`,1);return;
-  }
+  if(g1.round>=10){showResult(g1.score>=8?'🏆':g1.score>=5?'😊':'💪',g1.score>=8?'Отлично!':g1.score>=5?'Хорошо!':'Тренируйся!',`Очки: ${g1.score} из 10`,1,g1.score);return}
   g1.round++;g1.answered=false;
   document.getElementById('g1-round').textContent=g1.round;
   document.getElementById('g1-feedback').textContent='';
-  const shuffled=[...COLORS].sort(()=>Math.random()-0.5);
-  const target=shuffled[0];
-  const opts=shuffled.slice(0,4).sort(()=>Math.random()-0.5);
+  const s=[...COLORS].sort(()=>Math.random()-0.5);
+  const target=s[0],opts=s.slice(0,4).sort(()=>Math.random()-0.5);
   const t=document.getElementById('g1-target');
   t.textContent=target.name;t.style.color=target.hex;t.style.borderColor=target.hex;
-  const op=document.getElementById('g1-options');
-  op.innerHTML='';
-  opts.forEach(c=>{
-    const b=document.createElement('button');
-    b.className='g1-btn';b.style.background=c.hex;
-    b.setAttribute('aria-label',c.name);
-    b.onclick=()=>g1Answer(b,c===target,target);
-    op.appendChild(b);
-  });
-  // timer bar
-  let t0=Date.now(),dur=5000;
-  const bar=document.getElementById('timer-bar');
-  bar.style.transition='none';bar.style.width='100%';
-  const tick=()=>{
-    if(g1.answered)return;
-    const left=1-(Date.now()-t0)/dur;
-    if(left<=0){bar.style.width='0%';if(!g1.answered)g1Answer(null,false,target,true);return}
-    bar.style.width=(left*100)+'%';
-    bar.style.background=left>0.5?'var(--color-primary)':left>0.25?'var(--color-warning)':'var(--color-error)';
-    g1.timer=requestAnimationFrame(tick);
-  };
-  g1.timer=requestAnimationFrame(tick);
+  const op=document.getElementById('g1-options');op.innerHTML='';
+  opts.forEach(c=>{const b=document.createElement('button');b.className='g1-btn';b.style.background=c.hex;b.setAttribute('aria-label',c.name);b.onclick=()=>g1Ans(b,c===target,target);op.appendChild(b)});
+  const bar=document.getElementById('timer-bar');bar.style.transition='none';bar.style.width='100%';
+  const t0=Date.now(),dur=5000;
+  const tick=()=>{if(g1.answered)return;const left=1-(Date.now()-t0)/dur;if(left<=0){bar.style.width='0%';if(!g1.answered)g1Ans(null,false,target,true);return}bar.style.width=(left*100)+'%';bar.style.background=left>0.5?'var(--color-primary)':left>0.25?'var(--color-warning)':'var(--color-error)';g1.raf=requestAnimationFrame(tick)};
+  g1.raf=requestAnimationFrame(tick);
 }
-function g1Answer(btn,correct,target,timeout=false){
-  if(g1.answered)return;
-  g1.answered=true;
-  if(g1.timer)cancelAnimationFrame(g1.timer);
+function g1Ans(btn,ok,target,timeout=false){
+  if(g1.answered)return;g1.answered=true;if(g1.raf)cancelAnimationFrame(g1.raf);
   const fb=document.getElementById('g1-feedback');
-  if(correct){g1.score++;document.getElementById('g1-score').textContent=g1.score;btn.classList.add('correct');fb.textContent='✅ Правильно!';fb.style.color='var(--color-success)'}
-  else{if(btn)btn.classList.add('wrong');fb.textContent=timeout?'⏰ Время вышло!':'❌ Не то!';fb.style.color='var(--color-error)'}
-  const t=setTimeout(g1Round,1100);allTimers.push(t);
+  if(ok){g1.score++;document.getElementById('g1-score').textContent=g1.score;btn.classList.add('correct');fb.textContent='✅ Правильно!';fb.style.color='var(--color-success)'}
+  else{if(btn)btn.classList.add('wrong');fb.textContent=timeout?'⏰ Время!':'❌ Не то!';fb.style.color='var(--color-error)'}
+  const t=setTimeout(g1Round,1000);allTimers.push(t);
 }
 
-// ══════════════════════════════════════════════════════════
-// GAME 2: Найди лишнее
-// ══════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════
+   GAME 2 — Найди лишнее
+══════════════════════════════════════════════ */
 const G2_SETS=[
-  {main:['🐶','🐶','🐶','🐶','🐶','🐶','🐶','🐶','🐶','🐶','🐶','🐶','🐶','🐶','🐶'],odd:'🐱'},
-  {main:['⭐','⭐','⭐','⭐','⭐','⭐','⭐','⭐','⭐','⭐','⭐','⭐','⭐','⭐','⭐'],odd:'🌙'},
-  {main:['🍎','🍎','🍎','🍎','🍎','🍎','🍎','🍎','🍎','🍎','🍎','🍎','🍎','🍎','🍎'],odd:'🍊'},
-  {main:['🚗','🚗','🚗','🚗','🚗','🚗','🚗','🚗','🚗','🚗','🚗','🚗','🚗','🚗','🚗'],odd:'🚕'},
-  {main:['🌺','🌺','🌺','🌺','🌺','🌺','🌺','🌺','🌺','🌺','🌺','🌺','🌺','🌺','🌺'],odd:'🌸'},
-  {main:['🐟','🐟','🐟','🐟','🐟','🐟','🐟','🐟','🐟','🐟','🐟','🐟','🐟','🐟','🐟'],odd:'🐠'},
-  {main:['🏠','🏠','🏠','🏠','🏠','🏠','🏠','🏠','🏠','🏠','🏠','🏠','🏠','🏠','🏠'],odd:'🏡'},
-  {main:['🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈','🎈'],odd:'🎉'},
+  {main:'🐶',odd:'🐱'},{main:'⭐',odd:'🌙'},{main:'🍎',odd:'🍊'},
+  {main:'🚗',odd:'🚕'},{main:'🌺',odd:'🌸'},{main:'🐟',odd:'🐠'},
+  {main:'🏠',odd:'🏡'},{main:'🎈',odd:'🎉'},
 ];
-let g2={score:0,lives:3,round:0,total:8,locked:false};
-function initG2(){
-  g2={score:0,lives:3,round:0,total:8,locked:false};
-  document.getElementById('g2-score').textContent=0;
-  document.getElementById('g2-lives').textContent=3;
-  const rd=document.getElementById('g2-rounds');
-  rd.innerHTML='';for(let i=0;i<g2.total;i++){const d=document.createElement('div');d.className='round-dot';rd.appendChild(d)}
-  g2Round();
-}
+let g2={score:0,lives:3,round:0,locked:false};
+function initG2(){g2={score:0,lives:3,round:0,locked:false};document.getElementById('g2-score').textContent=0;document.getElementById('g2-lives').textContent=3;const rd=document.getElementById('g2-rounds');rd.innerHTML='';for(let i=0;i<8;i++){const d=document.createElement('div');d.className='round-dot';rd.appendChild(d)}g2Round()}
 function g2Round(){
-  if(g2.round>=g2.total||g2.lives<=0){
-    const emoji=g2.score>=7?'🏆':g2.score>=4?'😊':'💪';
-    showResult(emoji,g2.lives>0?'Молодец!':'Попробуй ещё!',`Найдено: ${g2.score} из ${g2.total}`,2);return;
-  }
-  g2.locked=false;
-  document.getElementById('g2-feedback').textContent='';
+  if(g2.round>=8||g2.lives<=0){showResult(g2.score>=7?'🏆':g2.score>=4?'😊':'💪',g2.lives>0?'Молодец!':'Попробуй ещё!',`Найдено: ${g2.score} из 8`,2,g2.score);return}
+  g2.locked=false;document.getElementById('g2-feedback').textContent='';
   const dots=document.querySelectorAll('#g2-rounds .round-dot');
   dots.forEach((d,i)=>{d.classList.toggle('done',i<g2.round);d.classList.toggle('current',i===g2.round)});
   const set=G2_SETS[g2.round%G2_SETS.length];
-  const items=[...set.main.slice(0,15),set.odd];
-  const shuffled=items.sort(()=>Math.random()-0.5);
-  const grid=document.getElementById('g2-grid');
-  grid.innerHTML='';
-  shuffled.forEach((em,i)=>{
-    const c=document.createElement('div');
-    c.className='g2-cell';c.textContent=em;
-    const isOdd=em===set.odd;
-    c.onclick=()=>g2Click(c,isOdd,grid);
-    grid.appendChild(c);
-  });
+  const items=Array(15).fill(set.main).concat([set.odd]).sort(()=>Math.random()-0.5);
+  const grid=document.getElementById('g2-grid');grid.innerHTML='';
+  items.forEach(em=>{const c=document.createElement('div');c.className='g2-cell';c.textContent=em;c.onclick=()=>g2Click(c,em===set.odd);grid.appendChild(c)});
 }
-function g2Click(cell,correct,grid){
-  if(g2.locked)return;g2.locked=true;
+function g2Click(cell,ok){
+  if(g2.locked)return;
   const fb=document.getElementById('g2-feedback');
-  if(correct){
-    cell.classList.add('correct');g2.score++;document.getElementById('g2-score').textContent=g2.score;
-    fb.textContent='🎉 Нашёл! Молодец!';fb.style.color='var(--color-success)';
-    g2.round++;
-  }else{
-    cell.classList.add('wrong');g2.lives--;document.getElementById('g2-lives').textContent=g2.lives;
-    fb.textContent='❌ Не то, попробуй ещё!';fb.style.color='var(--color-error)';
-    if(g2.lives<=0){const t=setTimeout(g2Round,800);allTimers.push(t);return}
-    const t2=setTimeout(()=>{cell.classList.remove('wrong');g2.locked=false;fb.textContent=''},700);allTimers.push(t2);return;
-  }
-  const t=setTimeout(g2Round,900);allTimers.push(t);
+  if(ok){g2.locked=true;cell.classList.add('correct');g2.score++;document.getElementById('g2-score').textContent=g2.score;fb.textContent='🎉 Нашёл!';fb.style.color='var(--color-success)';g2.round++;const t=setTimeout(g2Round,800);allTimers.push(t)}
+  else{cell.classList.add('wrong');g2.lives--;document.getElementById('g2-lives').textContent=g2.lives;fb.textContent='❌ Не то!';fb.style.color='var(--color-error)';if(g2.lives<=0){g2.locked=true;const t=setTimeout(g2Round,700);allTimers.push(t);return}const t2=setTimeout(()=>{cell.classList.remove('wrong');fb.textContent=''},600);allTimers.push(t2)}
 }
 
-// ══════════════════════════════════════════════════════════
-// GAME 3: Пауза (дыхание 4-7-8)
-// ══════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════
+   GAME 3 — Пауза
+══════════════════════════════════════════════ */
 let g3Active=false,g3Cycle=0,g3Interval=null;
-function initG3(){
-  document.getElementById('g3-phase').textContent='';
-  document.getElementById('g3-counter').textContent='';
-  document.getElementById('g3-circle').textContent='Готов?';
-  document.getElementById('g3-circle').className='';
-  document.getElementById('g3-start-btn').style.display='';
-  document.getElementById('g3-stop-btn').style.display='none';
-}
-function startBreathing(){
-  g3Active=true;g3Cycle=0;
-  document.getElementById('g3-start-btn').style.display='none';
-  document.getElementById('g3-stop-btn').style.display='';
-  g3DoPhase('inhale',4);
-}
-function g3DoPhase(phase,secs){
+function initG3(){document.getElementById('g3-phase').textContent='';document.getElementById('g3-counter').textContent='';document.getElementById('g3-circle').textContent='Готов?';document.getElementById('g3-circle').className='';document.getElementById('g3-start-btn').style.display='';document.getElementById('g3-stop-btn').style.display='none'}
+function startBreathing(){g3Active=true;g3Cycle=0;document.getElementById('g3-start-btn').style.display='none';document.getElementById('g3-stop-btn').style.display='';g3Phase('inhale',4)}
+function g3Phase(phase,secs){
   if(!g3Active)return;
-  const circle=document.getElementById('g3-circle');
-  const phaseEl=document.getElementById('g3-phase');
-  const counterEl=document.getElementById('g3-counter');
-  const labels={inhale:'Вдох',hold:'Задержка',exhale:'Выдох'};
-  circle.className=phase;
-  phaseEl.textContent=labels[phase];
-  let count=secs;
-  counterEl.textContent=count+'с';
-  circle.textContent=labels[phase];
+  const circle=document.getElementById('g3-circle'),ph=document.getElementById('g3-phase'),ct=document.getElementById('g3-counter');
+  const labels={inhale:'🫁 Вдох',hold:'⏸ Задержка',exhale:'😮‍💨 Выдох'};
+  circle.className=phase;circle.textContent=labels[phase];ph.textContent=labels[phase];
+  let count=secs;ct.textContent=count+'с';
   if(g3Interval)clearInterval(g3Interval);
   g3Interval=setInterval(()=>{
     if(!g3Active){clearInterval(g3Interval);return}
-    count--;counterEl.textContent=count+'с';
-    if(count<=0){
-      clearInterval(g3Interval);
-      if(phase==='inhale')g3DoPhase('hold',7);
-      else if(phase==='hold')g3DoPhase('exhale',8);
-      else{g3Cycle++;if(g3Cycle>=4){stopBreathing();document.getElementById('g3-phase').textContent='Отлично! Упражнение завершено 🌟';document.getElementById('g3-counter').textContent=''}
-           else g3DoPhase('inhale',4);}
+    count--;ct.textContent=count+'с';
+    if(count<=0){clearInterval(g3Interval);
+      if(phase==='inhale')g3Phase('hold',7);
+      else if(phase==='hold')g3Phase('exhale',8);
+      else{g3Cycle++;if(g3Cycle>=4){stopBreathing();saveRecord(3,g3Cycle);document.getElementById('g3-phase').textContent='🌟 Упражнение завершено!';document.getElementById('g3-counter').textContent=''}else g3Phase('inhale',4)}
     }
   },1000);
 }
-function stopBreathing(){
-  g3Active=false;if(g3Interval)clearInterval(g3Interval);g3Interval=null;
-  if(document.getElementById('g3-start-btn')){
-    document.getElementById('g3-start-btn').style.display='';
-    document.getElementById('g3-stop-btn').style.display='none';
-  }
-  const circle=document.getElementById('g3-circle');
-  if(circle){circle.className='';circle.textContent='Готов?'}
-}
+function stopBreathing(){g3Active=false;if(g3Interval){clearInterval(g3Interval);g3Interval=null}const s=document.getElementById('g3-start-btn');const e=document.getElementById('g3-stop-btn');if(s)s.style.display='';if(e)e.style.display='none';const c=document.getElementById('g3-circle');if(c){c.className='';c.textContent='Готов?'}}
 
-// ══════════════════════════════════════════════════════════
-// GAME 4: Таблица Шульте
-// ══════════════════════════════════════════════════════════
-let g4={next:1,startTime:null,timer:null};
-let g4Timer=null;
+/* ══════════════════════════════════════════════
+   GAME 4 — Шульте
+══════════════════════════════════════════════ */
+let g4={next:1,startTime:null};let g4Timer=null;
 function initG4(){
   g4={next:1,startTime:Date.now()};
-  document.getElementById('g4-time').textContent=0;
-  document.getElementById('g4-next').textContent=1;
-  document.getElementById('g4-target-num').textContent=1;
-  document.getElementById('g4-feedback').textContent='Нажимай числа от 1 до 25 по порядку!';
+  document.getElementById('g4-time').textContent=0;document.getElementById('g4-next').textContent=1;document.getElementById('g4-target-num').textContent=1;document.getElementById('g4-feedback').textContent='Нажимай числа от 1 до 25 по порядку!';
   if(g4Timer)clearInterval(g4Timer);
-  g4Timer=setInterval(()=>{
-    if(document.getElementById('screen-4').classList.contains('active'))
-      document.getElementById('g4-time').textContent=Math.floor((Date.now()-g4.startTime)/1000);
-  },500);
+  g4Timer=setInterval(()=>{if(document.getElementById('screen-4').classList.contains('active'))document.getElementById('g4-time').textContent=Math.floor((Date.now()-g4.startTime)/1000)},500);
   const nums=Array.from({length:25},(_,i)=>i+1).sort(()=>Math.random()-0.5);
   const grid=document.getElementById('g4-grid');grid.innerHTML='';
-  nums.forEach(n=>{
-    const c=document.createElement('div');
-    c.className='g4-cell';c.textContent=n;c.dataset.num=n;
-    c.onclick=()=>g4Click(c,n);
-    grid.appendChild(c);
-  });
+  nums.forEach(n=>{const c=document.createElement('div');c.className='g4-cell';c.textContent=n;c.onclick=()=>g4Click(c,n);grid.appendChild(c)});
 }
 function g4Click(cell,n){
-  if(n===g4.next){
-    cell.classList.add('found');cell.onclick=null;
-    g4.next++;
-    document.getElementById('g4-target-num').textContent=g4.next;
-    document.getElementById('g4-next').textContent=g4.next;
-    if(g4.next>25){
-      clearInterval(g4Timer);
-      const t=Math.floor((Date.now()-g4.startTime)/1000);
-      showResult('🏆','Таблица пройдена!',`Время: ${t} секунд`,4);
-    }
-  }else{
-    cell.classList.add('error');const c=cell;
-    const t=setTimeout(()=>c.classList.remove('error'),400);allTimers.push(t);
-    document.getElementById('g4-feedback').textContent='Не то число! Ищи: '+g4.next;
-  }
+  if(n===g4.next){cell.classList.add('found');cell.onclick=null;g4.next++;document.getElementById('g4-target-num').textContent=g4.next;document.getElementById('g4-next').textContent=g4.next;
+    if(g4.next>25){clearInterval(g4Timer);const t=Math.floor((Date.now()-g4.startTime)/1000);showResult('🏆','Таблица пройдена!',`Время: ${t} секунд`,4,t)}}
+  else{cell.classList.add('error');const c=cell;const t=setTimeout(()=>c.classList.remove('error'),400);allTimers.push(t);document.getElementById('g4-feedback').textContent='Ищи: '+g4.next}
 }
 
-// ══════════════════════════════════════════════════════════
-// GAME 5: Запомни ряд
-// ══════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════
+   GAME 5 — Запомни ряд
+══════════════════════════════════════════════ */
 const G5_EMOJIS=['🐶','🐱','🐭','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐸','🐵','🐔','🐧','🦆'];
 let g5={level:1,score:0,seq:[],input:[],phase:'show'};
-function initG5(){
-  g5={level:1,score:0,seq:[],input:[],phase:'show'};
-  document.getElementById('g5-score').textContent=0;
-  document.getElementById('g5-level-num').textContent=1;
-  g5NewRound();
-}
+function initG5(){g5={level:1,score:0,seq:[],input:[],phase:'show'};document.getElementById('g5-score').textContent=0;document.getElementById('g5-level-num').textContent=1;g5NewRound()}
 function g5NewRound(){
   g5.input=[];g5.phase='show';
   const len=2+g5.level;
   const pool=[...G5_EMOJIS].sort(()=>Math.random()-0.5).slice(0,6);
   g5.seq=Array.from({length:len},()=>pool[Math.floor(Math.random()*pool.length)]);
-  // build seq indicators
-  const seqEl=document.getElementById('g5-seq');
-  seqEl.innerHTML='';
+  const seqEl=document.getElementById('g5-seq');seqEl.innerHTML='';
   g5.seq.forEach(()=>{const d=document.createElement('div');d.className='g5-indicator';seqEl.appendChild(d)});
-  // build cards (unique emojis shown)
-  const cards=document.getElementById('g5-cards');
-  cards.innerHTML='';
-  pool.forEach(em=>{
-    const c=document.createElement('div');
-    c.className='g5-card disabled';c.textContent=em;c.dataset.em=em;
-    c.onclick=()=>g5Pick(c,em);
-    cards.appendChild(c);
-  });
+  const cards=document.getElementById('g5-cards');cards.innerHTML='';
+  pool.forEach(em=>{const c=document.createElement('div');c.className='g5-card disabled';c.textContent=em;c.dataset.em=em;c.onclick=()=>g5Pick(c,em);cards.appendChild(c)});
   document.getElementById('g5-instruction').textContent='👀 Запоминай...';
   document.getElementById('g5-level').textContent=`Уровень ${g5.level} — запомни ${len} картинки`;
-  g5ShowSeq();
+  g5Show();
 }
-function g5ShowSeq(){
-  const indicators=document.querySelectorAll('#g5-seq .g5-indicator');
-  let i=0;
+function g5Show(){
+  const inds=document.querySelectorAll('#g5-seq .g5-indicator');let i=0;
   const show=()=>{
     if(!document.getElementById('screen-5').classList.contains('active'))return;
-    if(i>=g5.seq.length){
-      const t=setTimeout(()=>{
-        indicators.forEach(d=>d.classList.remove('active'));
-        g5.phase='input';
-        document.getElementById('g5-instruction').textContent='🔁 Повтори в том же порядке!';
-        document.querySelectorAll('.g5-card').forEach(c=>c.classList.remove('disabled'));
-      },500);allTimers.push(t);return;
-    }
-    if(i>0)indicators[i-1].classList.remove('active');
-    indicators[i].classList.add('active');
-    // highlight card
-    const em=g5.seq[i];
-    document.querySelectorAll('.g5-card').forEach(c=>{
-      c.classList.toggle('highlight',c.dataset.em===em);
-    });
-    i++;
-    const t=setTimeout(()=>{document.querySelectorAll('.g5-card').forEach(c=>c.classList.remove('highlight'));
-      const t2=setTimeout(show,300);allTimers.push(t2);},700);allTimers.push(t);
-  };
-  const t=setTimeout(show,600);allTimers.push(t);
+    if(i>=g5.seq.length){const t=setTimeout(()=>{inds.forEach(d=>d.classList.remove('active'));g5.phase='input';document.getElementById('g5-instruction').textContent='🔁 Повтори в том же порядке!';document.querySelectorAll('.g5-card').forEach(c=>c.classList.remove('disabled'))},500);allTimers.push(t);return}
+    if(i>0)inds[i-1].classList.remove('active');inds[i].classList.add('active');
+    const em=g5.seq[i];document.querySelectorAll('.g5-card').forEach(c=>c.classList.toggle('highlight',c.dataset.em===em));i++;
+    const t=setTimeout(()=>{document.querySelectorAll('.g5-card').forEach(c=>c.classList.remove('highlight'));const t2=setTimeout(show,300);allTimers.push(t2)},700);allTimers.push(t);
+  };const t=setTimeout(show,500);allTimers.push(t);
 }
 function g5Pick(cell,em){
   if(g5.phase!=='input')return;
   const idx=g5.input.length;
   if(em===g5.seq[idx]){
-    cell.classList.add('correct');
-    const t=setTimeout(()=>cell.classList.remove('correct'),400);allTimers.push(t);
+    cell.classList.add('correct');const t=setTimeout(()=>cell.classList.remove('correct'),400);allTimers.push(t);
     document.querySelectorAll('#g5-seq .g5-indicator')[idx].classList.add('correct');
     g5.input.push(em);
     if(g5.input.length===g5.seq.length){
       g5.phase='done';g5.score++;document.getElementById('g5-score').textContent=g5.score;
-      document.getElementById('g5-instruction').textContent='🎉 Верно! Молодец!';
+      document.getElementById('g5-instruction').textContent='🎉 Верно!';
       g5.level++;document.getElementById('g5-level-num').textContent=g5.level;
       document.querySelectorAll('.g5-card').forEach(c=>c.classList.add('disabled'));
-      if(g5.level>8){showResult('🏆','Все уровни пройдены!',`Очки: ${g5.score}`,5);return}
-      const t=setTimeout(g5NewRound,1200);allTimers.push(t);
+      if(g5.level>8){showResult('🏆','Все уровни!',`Очки: ${g5.score}`,5,g5.score);return}
+      const t=setTimeout(g5NewRound,1100);allTimers.push(t);
     }
   }else{
-    cell.classList.add('wrong');
-    g5.phase='done';
-    document.querySelectorAll('.g5-card').forEach(c=>c.classList.add('disabled'));
-    document.getElementById('g5-instruction').textContent='😅 Ошибка! Начнём снова';
-    const t=setTimeout(()=>{
-      cell.classList.remove('wrong');
-      g5.level=Math.max(1,g5.level-1);
-      document.getElementById('g5-level-num').textContent=g5.level;
-      g5NewRound();
-    },1400);allTimers.push(t);
+    cell.classList.add('wrong');g5.phase='done';document.querySelectorAll('.g5-card').forEach(c=>c.classList.add('disabled'));
+    document.getElementById('g5-instruction').textContent='😅 Ошибка!';
+    const t=setTimeout(()=>{cell.classList.remove('wrong');g5.level=Math.max(1,g5.level-1);document.getElementById('g5-level-num').textContent=g5.level;g5NewRound()},1300);allTimers.push(t);
   }
 }
+
+/* ══════════════════════════════════════════════
+   INIT — auto-login from session
+══════════════════════════════════════════════ */
+(function(){
+  const login=loadSession();
+  if(login){
+    const users=loadUsers();
+    if(users[login]){loginAs(login,users[login]);return}
+  }
+  renderHeader();
+  showScreen('screen-login');
+})();
 </script>
 </body>
 </html>
