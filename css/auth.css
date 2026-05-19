@@ -1,5 +1,5 @@
 <style>
-/* ─── AUTH SCREEN ─── */
+/* ─── AUTH SCREENS ─── */
 .auth-wrap{max-width:420px;margin:2rem auto}
 .auth-card{background:var(--color-surface);border:1.5px solid var(--color-border);border-radius:var(--radius-xl);padding:2.25rem 2rem;box-shadow:var(--shadow-md)}
 .auth-title{font-size:1.6rem;font-weight:900;text-align:center;margin-bottom:0.4rem}
