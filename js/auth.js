@@ -58,6 +58,9 @@ function guestMode(){
 }
 function doLogout(){
   stopBreathing();clearAllTimers();
+  if(g1.raf){cancelAnimationFrame(g1.raf);g1.raf=null;}
+  if(g1.reactionRaf){cancelAnimationFrame(g1.reactionRaf);g1.reactionRaf=null;}
+  g2StopTimer();
   currentUser=null;clearSession();renderHeader();showScreen('screen-login');
 }
 
@@ -90,25 +93,6 @@ function renderHeader(){
    ИНИЦИАЛИЗАЦИЯ
 ══════════════════════════════════════════════ */
 window.addEventListener('DOMContentLoaded',()=>{
-  document.getElementById('li-submit')   ?.addEventListener('click',doLogin);
-  document.getElementById('reg-submit')  ?.addEventListener('click',doRegister);
-  document.getElementById('go-register') ?.addEventListener('click',()=>showScreen('screen-register'));
-  document.getElementById('go-login')    ?.addEventListener('click',()=>showScreen('screen-login'));
-  document.getElementById('guest-btn')   ?.addEventListener('click',guestMode);
-  document.getElementById('result-home') ?.addEventListener('click',goHome);
-  document.getElementById('g3-start-btn')?.addEventListener('click',startBreathing);
-  document.getElementById('g3-stop-btn') ?.addEventListener('click',stopBreathing);
-
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
-    b.addEventListener('click',()=>switchTab(['games','profile','leaderboard'][i]));
-  });
-  document.querySelectorAll('[data-game]').forEach(card=>{
-    card.addEventListener('click',()=>startGame(Number(card.dataset.game)));
-  });
-  document.querySelectorAll('.back-btn').forEach(b=>{
-    b.addEventListener('click',goHome);
-  });
-
   const login=loadSession();
   if(login){const users=loadUsers();if(users[login]){loginAs(login,users[login]);return;}}
   renderHeader();showScreen('screen-login');
