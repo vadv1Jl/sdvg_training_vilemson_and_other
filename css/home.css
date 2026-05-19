@@ -1,0 +1,29 @@
+<style>
+/* HOME */
+.hero{text-align:center;padding:1rem 0 2rem}
+.hero h1{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:900;line-height:1.1;margin-bottom:0.75rem;background:linear-gradient(135deg,var(--color-primary),var(--color-accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--color-text-muted);font-size:1.1rem;max-width:42ch;margin:0 auto 2rem}
+.game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:1.25rem;margin-top:1.5rem}
+.game-card{
+  background:var(--color-surface);
+  border:1.5px solid var(--color-border);
+  border-radius:var(--radius-xl);
+  padding:1.5rem;
+  cursor:pointer;
+  transition:all var(--transition);
+  box-shadow:var(--shadow-sm);
+  position:relative;
+  overflow:hidden;
+}
+.game-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:4px;
+  background:var(--card-color);
+  border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+}
+.game-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+.card-emoji{font-size:2.5rem;margin-bottom:0.75rem}
+.card-title{font-size:1.15rem;font-weight:800;margin-bottom:0.35rem}
+.card-desc{font-size:0.9rem;color:var(--color-text-muted);line-height:1.5}
+.card-tag{display:inline-block;margin-top:0.75rem;padding:0.2rem 0.75rem;border-radius:var(--radius-xl);font-size:0.75rem;font-weight:700;background:color-mix(in oklch,var(--card-color) 12%,transparent);color:var(--card-color)}
+</style>
